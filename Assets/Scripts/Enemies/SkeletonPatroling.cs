@@ -7,6 +7,7 @@ public class SkeletonPatroling : MonoBehaviour
     public float speed = 10f;
     public GameObject first;
     public GameObject second;
+    public float life = 100f;
     public float waitingTime = 2f;
     public float reactRange = 1f;
     public float chaseRange = 4f;
@@ -16,9 +17,11 @@ public class SkeletonPatroling : MonoBehaviour
     private Rigidbody2D _rigidbody;
     private Transform _ladderTarget;
     private Transform _player;
-    private bool _isReacting = false;
-    private bool _isChasing = false;
-    private bool _isAttacking = false;
+    private bool _isReacting;
+    private bool _isChasing;
+    private bool _isAttacking;
+    private bool _inLadder;
+    private bool _takingDamage;
 
     void Awake()
     {
@@ -38,8 +41,8 @@ public class SkeletonPatroling : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        if(_player != null && !_isChasing && Vector2.Distance(transform.position, _player.position) < reactRange)
+    { 
+        if(_player != null && !_isChasing && !_inLadder && Vector2.Distance(transform.position, _player.position) < reactRange)
         {
             if (!_isReacting)
             {
@@ -49,15 +52,6 @@ public class SkeletonPatroling : MonoBehaviour
                 _animator.SetBool("Idle", false);
                 _rigidbody.velocity = Vector2.zero;
                 _isReacting = true;
-            }
-            else
-            {
-                if (!_animator.GetCurrentAnimatorStateInfo(0).IsTag("React"))
-                {
-                    _isChasing = true;
-                    _isReacting = false;
-                    speed *= 2;
-                }
             }
         }
 
@@ -87,16 +81,16 @@ public class SkeletonPatroling : MonoBehaviour
             
         }
 
-        if(_isAttacking && !_animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
-        {
-            _isAttacking = false;
-            transform.position = new Vector2(transform.position.x, transform.position.y - 0.11f);
-        }
-
     }
 
     private void LateUpdate()
-    { 
+    {
+        if (_isReacting && !_animator.GetCurrentAnimatorStateInfo(0).IsTag("React"))
+        {
+            _isChasing = true;
+            _isReacting = false;
+            speed *= 2;
+        }
         if (_isChasing)
         {
             if(_player.position.x >= transform.position.x)
@@ -107,6 +101,11 @@ public class SkeletonPatroling : MonoBehaviour
             {
                 transform.localScale = new Vector3(-1, 1, 1);
             }
+        }
+        if (_isAttacking && !_animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
+        {
+            _isAttacking = false;
+            transform.position = new Vector2(transform.position.x, transform.position.y - 0.11f);
         }
     }
 
@@ -134,7 +133,6 @@ public class SkeletonPatroling : MonoBehaviour
 
     private void UpdateDirection()
     {
-        // First Time
         if (_target == null)
         {
             _target = first;
@@ -142,8 +140,6 @@ public class SkeletonPatroling : MonoBehaviour
                 transform.localScale = new Vector3(1, 1, 1);
             else
                 transform.localScale = new Vector3(-1, 1, 1);
-
-            return;
         }
         
         else if (_target.transform.position.x == first.transform.position.x)
@@ -157,17 +153,28 @@ public class SkeletonPatroling : MonoBehaviour
             _target = first;
             transform.localScale = new Vector3(-1, 1, 1);
         }
+        else
+        {
+            _target = first;
+            if (transform.position.x <= first.transform.position.x)
+                transform.localScale = new Vector3(1, 1, 1);
+            else
+                transform.localScale = new Vector3(-1, 1, 1);
+        }
     }
 
     public void moveInLadder(Transform endLadder)
     {
-        if(!_isReacting && !_isChasing)
+        if(!_isReacting && !_isChasing && 
+            Vector2.Distance(endLadder.position, _target.transform.position) < Vector2.Distance(transform.position, _target.transform.position))
         {
             StopAllCoroutines();
             _ladderTarget = endLadder;
+            _inLadder = true;
 
             GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
             StartCoroutine("MovingInLadder");
+
         }
     }
 
@@ -190,5 +197,18 @@ public class SkeletonPatroling : MonoBehaviour
         StartCoroutine("PatrolToTarget");
     }
 
+    public void takeDamage( float damage )
+    {
+
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "PlayerBullet")
+        {
+            Bullet bullet = collision.GetComponentInChildren<Bullet>();
+            takeDamage(bullet.damage);
+        }
+    }
 
 }
