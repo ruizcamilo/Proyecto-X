@@ -170,6 +170,9 @@ public class PlayerController : MonoBehaviour
 
     //Buff 1 speeds the player up by a factor given in a field
     public void SpeedupActive() {
+        if(_speedPowerup == true) {
+            return;
+        }
         _speedPowerup = true;
         maxspeed *= _factorOfSpeed;
         StartCoroutine(SpeedPowerDownRoutine());
@@ -183,6 +186,9 @@ public class PlayerController : MonoBehaviour
 
     //Buff 2 is the counteraction of Heavy Debuff; it makes the player lighter
     public void LeafFalling() {
+        if(_leafPowerup == true) {
+            return;
+        }
         _leafPowerup = true;
         rb2d.gravityScale /= debuffFactorHeavy;
         StartCoroutine(NormalFallingRoutine());
