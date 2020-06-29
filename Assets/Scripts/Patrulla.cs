@@ -8,9 +8,9 @@ public class Patrulla : MonoBehaviour
     public float velocidad;
 
     private bool movDerecha = false;
+    public LayerMask pisoLayerMask;
 
     public Transform detectaSuelo;
-
     public CircleCollider2D cc;
     public BoxCollider2D pared;
     public SpriteRenderer Oldi;
@@ -21,7 +21,8 @@ public class Patrulla : MonoBehaviour
     {
         
         transform.Translate(Vector2.right * velocidad * Time.deltaTime);
-        
+       // _hit = Physics2D.BoxCast(box.bounds.center, box.bounds.size, 0f, Vector2.down, .1f, pisoLayerMask);
+
         RaycastHit2D infoSuelo = Physics2D.Raycast(detectaSuelo.position, Vector2.down);
         Animator obs = GetComponent<Animator>();
         if(hp==0)
