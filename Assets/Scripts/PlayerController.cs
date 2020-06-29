@@ -99,20 +99,12 @@ public class PlayerController : MonoBehaviour
         float h = Input.GetAxis("Horizontal");
         if (h != 0)
         {
-            if (Input.GetKeyDown(KeyCode.Mouse1)&&dash)
+            if (Input.GetKeyDown(KeyCode.LeftShift)&&dash)
             {
                 Debug.Log("dashprron");
                 rb2d.velocity = new Vector2 (h * dashSpeed, rb2d.velocity.y);
                 dash = false;
-                //Debug.Log("Fuerza " + Vector2.right * dashSpeed);
-                //float limitedDashSpeed = Mathf.Clamp(rb2d.velocity.x, -maxDashSpeed, maxDashSpeed);
-                //Debug.Log("LimitedDash " + limitedDashSpeed);
-                //rb2d.velocity = new Vector2(limitedDashSpeed, rb2d.velocity.y);
-                //Debug.Log("vel " + rb2d.velocity);
-             //   rb2d.velocity = new Vector2(_inputAxis.x * dashSpeed * Time.deltaTime, rb2d.velocity.y);
-
-              //  rb2d.AddForce(Vector2.right * dashSpeed * h);
-
+    
             }
             else
             {
