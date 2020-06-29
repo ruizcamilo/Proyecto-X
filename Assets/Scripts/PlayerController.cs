@@ -221,6 +221,7 @@ public class PlayerController : MonoBehaviour
     {
         _hit = Physics2D.BoxCast(box.bounds.center, box.bounds.size, 0f, Vector2.down, .1f, pisoLayerMask);
         Debug.Log(_hit.collider);
+
         return _hit.collider != null;
 
     }
