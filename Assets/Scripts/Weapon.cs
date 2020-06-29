@@ -43,12 +43,23 @@ public class Weapon : MonoBehaviour
                 Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
                 break;
             case 1:
-                Quaternion rot1 = Quaternion.Euler(0, 0, 30f);
-                Quaternion rot2 = Quaternion.Euler(0, 0, -30f);
-                
-                Instantiate(bulletPrefab, firePoint.position, rot1);
-                Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-                Instantiate(bulletPrefab, firePoint.position, rot2);
+                if(firePoint.rotation.y == 0)
+                {
+                    Quaternion rot1 = Quaternion.Euler(firePoint.rotation.x, firePoint.rotation.y, firePoint.rotation.x+30f);
+                    Quaternion rot2 = Quaternion.Euler(firePoint.rotation.x, firePoint.rotation.y, firePoint.rotation.x-30f);
+                    Instantiate(bulletPrefab, firePoint.position, rot1);
+                    Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+                    Instantiate(bulletPrefab, firePoint.position, rot2);
+                }
+
+                if(firePoint.rotation.y == -1)
+                {
+                    Quaternion rot1 = Quaternion.Euler(firePoint.rotation.x, firePoint.rotation.y, firePoint.rotation.x+120f);
+                    Quaternion rot2 = Quaternion.Euler(firePoint.rotation.x, firePoint.rotation.y, firePoint.rotation.x-120f);
+                    Instantiate(bulletPrefab, firePoint.position, rot1);
+                    Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+                    Instantiate(bulletPrefab, firePoint.position, rot2);
+                }
                 break;
             case 2:
                 Instantiate(bigBulletPrefab, firePoint.position, firePoint.rotation);

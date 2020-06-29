@@ -11,6 +11,7 @@ public class Bullet : MonoBehaviour
     public float life;
     public Rigidbody2D rb;
     public GameObject BulletEnd;
+    public 
     void Start()
     {
         rb.velocity = transform.right * speed;
@@ -31,9 +32,10 @@ public class Bullet : MonoBehaviour
     {
         if (hitInfo.name == "Player" || hitInfo.name == "Circulo" || hitInfo.name == "Bullet(Clone)")
         {
-            //Debug.Log("No hit");
+           //Debug.Log(hitInfo.name);
         }
-        else{
+        else
+        {
             //Debug.Log(hitInfo.name);
             Destroy(gameObject);
             Instantiate(BulletEnd, rb.position, Quaternion.identity);
