@@ -35,6 +35,11 @@ public class PlayerController : MonoBehaviour
     bool _playerIsHeavy = false;
     bool _playerIsSingleJump = false;
 
+    //Buffs
+    bool _speedPowerup = false;
+    float _factorOfSpeed = 5f;
+    bool _leafPowerup = false;
+
 
 
     // Start is called before the first frame update
@@ -45,6 +50,7 @@ public class PlayerController : MonoBehaviour
         w = GetComponent<Weapon>();
         rend = GetComponent<Renderer>();
         original = rend.material.color;
+        grounded = true;
     }
 
     // Update is called once per frame
@@ -159,4 +165,34 @@ public class PlayerController : MonoBehaviour
                 break;
         }
     }
+
+    //These are the buffs added to the project
+
+    //Buff 1 speeds the player up by a factor given in a field
+    public void SpeedupActive() {
+        _speedPowerup = true;
+        maxspeed *= _factorOfSpeed;
+        StartCoroutine(SpeedPowerDownRoutine());
+    }
+
+    IEnumerator SpeedPowerDownRoutine() {
+        yield return new WaitForSeconds(5.0f);
+        maxspeed /= _factorOfSpeed;
+        _speedPowerup = false;
+    }
+
+    //Buff 2 is the counteraction of Heavy Debuff; it makes the player lighter
+    public void LeafFalling() {
+        _leafPowerup = true;
+        rb2d.gravityScale /= debuffFactorHeavy;
+        StartCoroutine(NormalFallingRoutine());
+    }
+
+    IEnumerator NormalFallingRoutine() {
+        yield return new WaitForSeconds(5.0f);
+        rb2d.gravityScale *= debuffFactorHeavy;
+        _leafPowerup = false;
+    }
+
+    //Buff 3 allows you to use the heavy shot
 }
