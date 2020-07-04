@@ -51,7 +51,7 @@ public class PlayerControllerV2 : MonoBehaviour
         _box = transform.GetComponent<BoxCollider2D>();
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
-        _weapon = GetComponent<Weapon>();
+        _weapon = GetComponentInChildren<Weapon>();
         _renderer = GetComponent<Renderer>();
         _original = _renderer.material.color;
 
@@ -60,15 +60,14 @@ public class PlayerControllerV2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        _grounded = IsGrounded();
         //Variable para evitar que se hagan actualizaciones si el jugador no se puede mover o el juego está pausado
         //Falta implementar la parte de pausar.
         if (!playerCanMove)
             return;
 
         _animator.SetFloat("Speed", Mathf.Abs(_rigidbody.velocity.x));
-        _animator.SetBool("Grounded", IsGrounded());
-
-        setColor();
+        _animator.SetBool("Grounded", _grounded);
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -76,18 +75,36 @@ public class PlayerControllerV2 : MonoBehaviour
             _animator.SetBool("Shoot", _shoot);
         }
 
-        _inputAxis = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        if (IsGrounded())
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            _fixed = true;
+        }
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            _fixed = false;
+        }
+
+        //_inputAxis = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        if (_grounded)
         {
             _jump = true;
             _walk = true;
             _dash = true;
         }
 
-        if (Input.GetKeyDown(KeyCode.W))
+        
+    }
+
+
+    void FixedUpdate()
+    {
+        if (_fixed)
+            _rigidbody.velocity = new Vector2(0, _rigidbody.velocity.y);
+
+        if (!_fixed && Input.GetKeyDown(KeyCode.W))
         {
             _walk = false;
-            if (IsGrounded())
+            if (_grounded)
             {
                 _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0);
                 _rigidbody.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
@@ -106,15 +123,11 @@ public class PlayerControllerV2 : MonoBehaviour
                 }
             }
         }
-    }
-
-
-    void FixedUpdate()
-    {
 
         float h = Input.GetAxis("Horizontal");
-        if (h != 0)
+        if (h != 0 && !_fixed)
         {
+            /*
             if (Input.GetKeyDown(KeyCode.LeftShift) && _dash)
             {
                 Debug.Log("dashprron");
@@ -128,26 +141,36 @@ public class PlayerControllerV2 : MonoBehaviour
 
                 float limitedSpeed = Mathf.Clamp(_rigidbody.velocity.x, -maxSpeed, maxSpeed);
                 _rigidbody.velocity = new Vector2(limitedSpeed, _rigidbody.velocity.y);
+            }*/
+
+            _rigidbody.AddForce(Vector2.right * speed * h);
+
+            float limitedSpeed = Mathf.Clamp(_rigidbody.velocity.x, -maxSpeed, maxSpeed);
+            _rigidbody.velocity = new Vector2(limitedSpeed, _rigidbody.velocity.y);
+
+            if (h > 0.1f)
+            {
+                transform.eulerAngles = new Vector3(0, 0, 0);
             }
 
-
+            if (h < -0.1f)
+            {
+                transform.eulerAngles = new Vector3(0, 180, 0);
+            }
         }
 
-        if (h > 0.1f)
-        {
-            transform.eulerAngles = new Vector3(0, 0, 0);
-        }
-
-        if (h < -0.1f)
-        {
-            transform.eulerAngles = new Vector3(0, 180, 0);
-        }
+        
 
         if (_shoot)
         {
             _animator.SetBool("Shoot", false);
         }
 
+    }
+
+    private void LateUpdate()
+    {
+        setColor();
     }
 
     //Slows down or returns the player to its orginal movement speed by a defined factor
@@ -184,7 +207,6 @@ public class PlayerControllerV2 : MonoBehaviour
 
     }
 
-
     void OnBecameInvisible()
     {
         transform.position = new Vector3(-2, 0, 0);
@@ -207,6 +229,7 @@ public class PlayerControllerV2 : MonoBehaviour
                 break;
         }
     }
+
     private bool IsGrounded()
     {
         return Physics2D.OverlapCircle(groundPoint.position, groundRadius, pisoLayerMask);

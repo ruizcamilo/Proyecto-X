@@ -747,12 +747,12 @@ PrefabInstance:
     - target: {fileID: 1601846605507268625, guid: 2fa5ce89b95e6cd4e89a0cf99e02e97c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.15
+      value: -4.31
       objectReference: {fileID: 0}
     - target: {fileID: 1601846605507268625, guid: 2fa5ce89b95e6cd4e89a0cf99e02e97c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.41
+      value: -1.7
       objectReference: {fileID: 0}
     - target: {fileID: 1601846605507268625, guid: 2fa5ce89b95e6cd4e89a0cf99e02e97c,
         type: 3}
@@ -804,15 +804,50 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 1601846606657257150, guid: 2fa5ce89b95e6cd4e89a0cf99e02e97c,
+    - target: {fileID: 1601846605671750182, guid: 2fa5ce89b95e6cd4e89a0cf99e02e97c,
         type: 3}
-      propertyPath: m_Name
-      value: Body
+      propertyPath: m_LocalRotation.z
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1911809704844152907, guid: 2fa5ce89b95e6cd4e89a0cf99e02e97c,
+    - target: {fileID: 1601846605671750182, guid: 2fa5ce89b95e6cd4e89a0cf99e02e97c,
         type: 3}
-      propertyPath: maxSpeed
-      value: 3
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1601846605671750182, guid: 2fa5ce89b95e6cd4e89a0cf99e02e97c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1601846605671750182, guid: 2fa5ce89b95e6cd4e89a0cf99e02e97c,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1601846605671750182, guid: 2fa5ce89b95e6cd4e89a0cf99e02e97c,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6491281926017327944, guid: 2fa5ce89b95e6cd4e89a0cf99e02e97c,
+        type: 3}
+      propertyPath: bigShoot
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6491281926017327944, guid: 2fa5ce89b95e6cd4e89a0cf99e02e97c,
+        type: 3}
+      propertyPath: tripleShoot
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6491281926017327944, guid: 2fa5ce89b95e6cd4e89a0cf99e02e97c,
+        type: 3}
+      propertyPath: radius
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6491281926017327944, guid: 2fa5ce89b95e6cd4e89a0cf99e02e97c,
+        type: 3}
+      propertyPath: upCenter
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2fa5ce89b95e6cd4e89a0cf99e02e97c, type: 3}

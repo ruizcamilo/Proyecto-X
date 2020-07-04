@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 1601846605507268716}
   - component: {fileID: 1601846605507268717}
   - component: {fileID: 1911809704844152907}
-  - component: {fileID: 1601846605507268631}
   m_Layer: 0
   m_Name: Player Ver 2
   m_TagString: Player
@@ -34,7 +33,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1601846606657257149}
-  - {fileID: 1601846605671750182}
+  - {fileID: 5846982111743006084}
   - {fileID: 8673371668161799512}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -168,7 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2208543a180dc0348ae9a30c4b3fd651, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxspeed: 3
+  maxSpeed: 3
   dashSpeed: 0
   speed: 75
   maxDashSpeed: 0
@@ -182,28 +181,6 @@ MonoBehaviour:
   debuffFactorSlow: 3
   debuffFactorHeavy: 3
   playerCanMove: 1
---- !u!114 &1601846605507268631
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1601846605507268718}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d0c350403daf9c4ba1cc4d265b80ab8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  firePoint: {fileID: 1601846605671750182}
-  bulletPrefab: {fileID: 5353879990598856201, guid: 2af49cad8fc3c47419786080d4c9b73e,
-    type: 3}
-  bigBulletPrefab: {fileID: 4755487441095163379, guid: fdaa0b80ff37fd649a8cfef5552f7622,
-    type: 3}
-  type: 0
-  maxWeapons: 0
-  normalShoot: 0.5
-  bigShoot: 3
-  tripleShoot: 2
 --- !u!1 &1601846605671750183
 GameObject:
   m_ObjectHideFlags: 0
@@ -227,12 +204,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1601846605671750183}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.316, y: 0.32, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.26, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1601846605507268625}
-  m_RootOrder: 1
+  m_Father: {fileID: 5846982111743006084}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1601846606657257150
 GameObject:
@@ -245,7 +222,7 @@ GameObject:
   - component: {fileID: 1601846606657257149}
   - component: {fileID: 1601846606657257148}
   m_Layer: 0
-  m_Name: Circulo
+  m_Name: Body
   m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -281,6 +258,62 @@ CircleCollider2D:
   m_Offset: {x: 0.0136113465, y: 0}
   serializedVersion: 2
   m_Radius: 0.28638867
+--- !u!1 &6843575572688930053
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5846982111743006084}
+  - component: {fileID: 6491281926017327944}
+  m_Layer: 0
+  m_Name: ShootingSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5846982111743006084
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6843575572688930053}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.052, y: 0.34000003, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1601846605671750182}
+  m_Father: {fileID: 1601846605507268625}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6491281926017327944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6843575572688930053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d0c350403daf9c4ba1cc4d265b80ab8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 5353879990598856201, guid: 2af49cad8fc3c47419786080d4c9b73e,
+    type: 3}
+  bigBulletPrefab: {fileID: 4755487441095163379, guid: fdaa0b80ff37fd649a8cfef5552f7622,
+    type: 3}
+  maxWeapons: 3
+  type: 0
+  times:
+  - 0.3
+  - 2
+  - 1
+  radius: 0.025
+  upCenter: 0.02
 --- !u!1 &8673371668161799515
 GameObject:
   m_ObjectHideFlags: 0
@@ -293,7 +326,7 @@ GameObject:
   m_Layer: 0
   m_Name: GroundPoint
   m_TagString: Untagged
-  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
