@@ -9,6 +9,9 @@ public class Weapon : MonoBehaviour
     private Timer[] _timers;
     private Transform _firePoint;
 
+    [HideInInspector]
+    public int type;
+
     public GameObject bulletPrefab;
     public GameObject bigBulletPrefab;
 
@@ -16,7 +19,6 @@ public class Weapon : MonoBehaviour
     private int _facingRight;
 
     public int maxWeapons;
-    public int type;
     public float[] times ={0.3f, 2f, 1f};
 
     public float radius = 0.25f;
@@ -60,14 +62,12 @@ public class Weapon : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (_direction.x != 0 || _direction.y != 0)
+        if(_direction.x == 0 && _direction.y != 1)
         {
-            _firePoint.localPosition = _direction*radius;
+            _direction = new Vector2(1, 0);
+
         }
-        else
-        {
-            _firePoint.localPosition = (new Vector2(_facingRight, 0)) * radius;
-        }
+        _firePoint.localPosition = _direction * radius;
     }
 
     void Shoot()
@@ -81,26 +81,20 @@ public class Weapon : MonoBehaviour
 
             Quaternion rot = Quaternion.Euler(_firePoint.rotation.x, _firePoint.rotation.y, angle);
 
-            Vector2 instantiate;
-            if (angle > 0 && angle < 180)
-                instantiate = new Vector2(_firePoint.position.x, _firePoint.position.y + upCenter);
-            else
-                instantiate = _firePoint.position;
-
             switch (type)
             {
                 case 0:
-                    Instantiate(bulletPrefab, instantiate, rot);
+                    Instantiate(bulletPrefab, _firePoint.position, rot);
                     break;
                 case 1:
                     Quaternion rot1 = Quaternion.Euler(_firePoint.rotation.x, _firePoint.rotation.y, angle + 30f);
                     Quaternion rot2 = Quaternion.Euler(_firePoint.rotation.x, _firePoint.rotation.y, angle - 30f);
-                    Instantiate(bulletPrefab, instantiate, rot1);
-                    Instantiate(bulletPrefab, instantiate, rot);
-                    Instantiate(bulletPrefab, instantiate, rot2);
+                    Instantiate(bulletPrefab, _firePoint.position, rot1);
+                    Instantiate(bulletPrefab, _firePoint.position, rot);
+                    Instantiate(bulletPrefab, _firePoint.position, rot2);
                     break;
                 case 2:
-                    Instantiate(bigBulletPrefab, instantiate, rot);
+                    Instantiate(bigBulletPrefab, _firePoint.position, rot);
                     break;
                 default:
                     print("There's been an error");

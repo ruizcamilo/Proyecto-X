@@ -38,7 +38,7 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D hitInfo)
     {
-        if (hitInfo.name == "Player" || hitInfo.name == "Circulo" || hitInfo.name == "Bullet(Clone)")
+        if (hitInfo.name == "Player" || hitInfo.name == "Circulo")
         {
            //Debug.Log(hitInfo.name);
         }

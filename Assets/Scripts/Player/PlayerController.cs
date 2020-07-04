@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿//using System.Threading.Tasks.Dataflow;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerControllerV2 : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     public float maxSpeed;
     public float dashSpeed;
@@ -92,7 +93,7 @@ public class PlayerControllerV2 : MonoBehaviour
             _dash = true;
         }
 
-        
+
     }
 
 
@@ -148,18 +149,18 @@ public class PlayerControllerV2 : MonoBehaviour
             float limitedSpeed = Mathf.Clamp(_rigidbody.velocity.x, -maxSpeed, maxSpeed);
             _rigidbody.velocity = new Vector2(limitedSpeed, _rigidbody.velocity.y);
 
-            if (h > 0.1f)
-            {
-                transform.eulerAngles = new Vector3(0, 0, 0);
-            }
-
-            if (h < -0.1f)
-            {
-                transform.eulerAngles = new Vector3(0, 180, 0);
-            }
+            
         }
 
-        
+        if (h > 0.1f)
+        {
+            transform.eulerAngles = new Vector3(0, 0, 0);
+        }
+
+        if (h < -0.1f)
+        {
+            transform.eulerAngles = new Vector3(0, 180, 0);
+        }
 
         if (_shoot)
         {
