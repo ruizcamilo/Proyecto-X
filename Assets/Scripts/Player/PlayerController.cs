@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     public Transform groundPoint;
     public float groundRadius;
     public float jumpPower;
+    private float healt;
+    public float Max_healt;
 
     //Factores de debuff
     public float debuffTime = 10f;
@@ -41,7 +43,7 @@ public class PlayerController : MonoBehaviour
     private bool _grounded;
     private RaycastHit2D _hit;
     private Vector2 _inputAxis;
-
+    private Timer inmunnity;
     // Shooting
     private bool _shoot;
     private bool _fixed;
@@ -55,17 +57,39 @@ public class PlayerController : MonoBehaviour
         _weapon = GetComponentInChildren<Weapon>();
         _renderer = GetComponent<Renderer>();
         _original = _renderer.material.color;
+        _box = GetComponent<BoxCollider2D>();
+        healt = Max_healt;
+        inmunnity = gameObject.AddComponent<Timer>();
+        inmunnity.Duration =0.5f;
+        inmunnity.Run();
+
 
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (_box.IsTouchingLayers()&&inmunnity.Finished)
+        {
+            healt -= 1;
+            inmunnity.Run();
+            //Debug.Log("vida: "+healt);
+            if(healt ==0)
+            {
+                Debug.Log("U DED");
+                OnBecameInvisible();
+                healt = Max_healt;
+            }
+        }
+
+
+        
         _grounded = IsGrounded();
         //Variable para evitar que se hagan actualizaciones si el jugador no se puede mover o el juego está pausado
         //Falta implementar la parte de pausar.
         if (!playerCanMove)
             return;
+
 
         _animator.SetFloat("Speed", Mathf.Abs(_rigidbody.velocity.x));
         _animator.SetBool("Grounded", _grounded);
@@ -99,6 +123,9 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+
+
+       
         if (_fixed)
             _rigidbody.velocity = new Vector2(0, _rigidbody.velocity.y);
 
@@ -236,4 +263,6 @@ public class PlayerController : MonoBehaviour
         return Physics2D.OverlapCircle(groundPoint.position, groundRadius, pisoLayerMask);
     }
 
+
+    
 }
