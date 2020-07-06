@@ -6,6 +6,7 @@ public class Patrulla : MonoBehaviour
 {
     // Start is called before the first frame update
     public float velocidad;
+    public float damage;
 
     private bool movDerecha = false;
     public LayerMask pisoLayerMask;
@@ -14,9 +15,8 @@ public class Patrulla : MonoBehaviour
     public CircleCollider2D cc;
     public BoxCollider2D pared;
     public SpriteRenderer Oldi;
-    public BoxCollider2D bullet;
     public Sprite second;
-    private int hp = 5;
+    private float hp = 40;
     private void Update()
     {
         
@@ -25,16 +25,15 @@ public class Patrulla : MonoBehaviour
 
         RaycastHit2D infoSuelo = Physics2D.Raycast(detectaSuelo.position, Vector2.down);
         Animator obs = GetComponent<Animator>();
-        if(hp==0)
+        if(hp<=0)
         {
             velocidad = 0;
             obs.enabled = false;
             Oldi.sprite=second;
 
         }
-        if(cc.IsTouching(pared))
+        if(cc!=null&&cc.IsTouching(pared))
         {
-            print("si");
             transform.eulerAngles = new Vector3(0, -180, 0);
             movDerecha = false;
         }
@@ -53,15 +52,18 @@ public class Patrulla : MonoBehaviour
         }
         
     }
+
+
     void OnTriggerEnter2D(Collider2D hitInfo)
     {
-        if (hitInfo.name == "Bullet" ||  hitInfo.name == "Bullet(Clone)")
+       
+
+        if (hitInfo.name.Contains("Bullet"))
         {
-            hp -= 1;
+            Bullet bul = hitInfo.GetComponent<Bullet>();
+
+            hp -= bul.damage;
         }
-        else
-        {
-            Destroy(gameObject);
-        }
+        
     }
 }
