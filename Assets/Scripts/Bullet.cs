@@ -38,15 +38,7 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D hitInfo)
     {
-        if (hitInfo.name == "Player" || hitInfo.name == "Circulo")
-        {
-           //Debug.Log(hitInfo.name);
-        }
-        else
-        {
-            //Debug.Log(hitInfo.name);
-            Destroy(gameObject);
-            Instantiate(BulletEnd, _rigidbody.position, Quaternion.identity);
-        }
+        Destroy(gameObject);
+        Instantiate(BulletEnd, _rigidbody.position, Quaternion.identity);
     }
 }

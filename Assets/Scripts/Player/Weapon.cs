@@ -14,6 +14,7 @@ public class Weapon : MonoBehaviour
 
     public GameObject bulletPrefab;
     public GameObject bigBulletPrefab;
+    public GameObject shooter;
 
     private Vector2 _direction;
     private int _facingRight;
@@ -50,6 +51,7 @@ public class Weapon : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space))
         {
             Shoot();
+            shooter.GetComponent<Animator>().SetTrigger("Shoot");
         }
         
         _direction = new Vector2(Input.GetAxisRaw("Horizontal")*_facingRight, Input.GetAxisRaw("Vertical"));

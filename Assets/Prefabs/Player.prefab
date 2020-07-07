@@ -49,6 +49,7 @@ MonoBehaviour:
     type: 3}
   bigBulletPrefab: {fileID: 4755487441095163379, guid: fdaa0b80ff37fd649a8cfef5552f7622,
     type: 3}
+  shooter: {fileID: 7954736367113432582}
   maxWeapons: 3
   times:
   - 0.3
@@ -300,16 +301,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88eb6eed1b4adde4e8f87e8f67344855, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 3
-  dashSpeed: 0
+  maxSpeed: 4
+  dashSpeed: 60
   speed: 75
-  maxDashSpeed: 0
+  maxDashSpeed: 70
   pisoLayerMask:
     serializedVersion: 2
     m_Bits: 512
   groundPoint: {fileID: 3663027290886198169}
   groundRadius: 0.025
   jumpPower: 9.25
+  Max_health: 5
   debuffTime: 10
   debuffFactorSlow: 3
   debuffFactorHeavy: 3
