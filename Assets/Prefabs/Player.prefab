@@ -311,7 +311,7 @@ MonoBehaviour:
   groundPoint: {fileID: 3663027290886198169}
   groundRadius: 0.025
   jumpPower: 9.25
-  Max_health: 5
+  Max_health: 0
   debuffTime: 10
   debuffFactorSlow: 3
   debuffFactorHeavy: 3
