@@ -50,7 +50,6 @@ public class Weapon : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space))
         {
             Shoot();
-            shooter.GetComponent<Animator>().SetTrigger("Shoot");
         }
         
         _direction = new Vector2(Input.GetAxisRaw("Horizontal")*_facingRight, Input.GetAxisRaw("Vertical"));
@@ -102,7 +101,9 @@ public class Weapon : MonoBehaviour
                     break;
             }
             _timers[type].Run();
+
+            shooter.GetComponent<Animator>().SetTrigger("Shoot");
         }
-        
+
     }
 }

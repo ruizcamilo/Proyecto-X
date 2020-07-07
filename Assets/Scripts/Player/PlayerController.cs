@@ -63,8 +63,7 @@ public class PlayerController : MonoBehaviour
         inmunnity = gameObject.AddComponent<Timer>();
         inmunnity.Duration =0.5f;
         inmunnity.Run();
-
-
+        _facingRight = true;
     }
 
     // Update is called once per frame

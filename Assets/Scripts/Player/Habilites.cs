@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Habilites : MonoBehaviour
 {
-    public Collider2D body;
     public float invulnerabilityDuration;
     public float invulnerabilityRecovery;
     public float invulnerabilityFrame = 0.5f;
@@ -12,6 +11,7 @@ public class Habilites : MonoBehaviour
     private Timer _invDurationTimer;
     private Timer _invRecoveryTimer;
     private SpriteRenderer _renderer;
+    private Collider2D _hurtBox;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +20,7 @@ public class Habilites : MonoBehaviour
         _invDurationTimer.Duration = invulnerabilityDuration;
         _invRecoveryTimer = new Timer();
         _invRecoveryTimer.Duration = invulnerabilityRecovery;
+        _hurtBox = GetComponent<Collider2D>();
         _renderer = GetComponent<SpriteRenderer>();
     }
 
@@ -36,8 +37,8 @@ public class Habilites : MonoBehaviour
     IEnumerator Invulnerability()
     {
         _invDurationTimer.Run();
-        body.enabled = false;
-        while (_invDurationTimer.Finished)
+        _hurtBox.enabled = false;
+        while (!_invDurationTimer.Finished)
         {
             yield return new WaitForSecondsRealtime(invulnerabilityFrame);
             _renderer.enabled = false;
@@ -45,7 +46,7 @@ public class Habilites : MonoBehaviour
             _renderer.enabled = true;
             yield return null;
         }
-        body.enabled = true;
+        _hurtBox.enabled = true;
         _invRecoveryTimer.Run();        
     }
 }
