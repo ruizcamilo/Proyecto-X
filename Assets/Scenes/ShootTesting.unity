@@ -292,6 +292,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyBlue
       objectReference: {fileID: 0}
+    - target: {fileID: 3645873341786510986, guid: 5d60049389b3941d19e9626544bb5bb7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3645873341786511030, guid: 5d60049389b3941d19e9626544bb5bb7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -496,6 +501,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7954736367113432696, guid: 663775e21e91d0841b2fd31ec9976f90,
+        type: 3}
+      propertyPath: Max_health
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7954736367113432697, guid: 663775e21e91d0841b2fd31ec9976f90,
         type: 3}
