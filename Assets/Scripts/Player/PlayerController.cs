@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour
     private bool _jump, _walk, _dash;
     private bool _grounded;
     private bool _fixed;
+    private bool _facingRight;
 
     private RaycastHit2D _hit;
     private Vector2 _inputAxis;
@@ -162,10 +163,16 @@ public class PlayerController : MonoBehaviour
         _animator.SetBool("Grounded", _grounded);
         _animator.SetBool("Idle", _movement == Vector2.zero || _fixed ) ;
 
-        if(_movement.x > 0f)
+        if(_movement.x > 0f && !_facingRight)
+        {
             transform.eulerAngles = new Vector3(0, 0, 0);
-        else if(_movement.x < 0f)
+            _facingRight = true;
+        }
+        else if(_movement.x < 0f && _facingRight)
+        {
             transform.eulerAngles = new Vector3(0, 180, 0);
+            _facingRight = false;
+        }
 
     }
 
