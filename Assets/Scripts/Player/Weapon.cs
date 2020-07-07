@@ -33,7 +33,6 @@ public class Weapon : MonoBehaviour
         {
             _timers[i] = gameObject.AddComponent<Timer>();
             _timers[i].Duration = times[i];
-            _timers[i].Run();
         }
         
     }

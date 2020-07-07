@@ -17,7 +17,7 @@ public class Timer : MonoBehaviour
 	bool running = false;
 	
 	// support for Finished property
-	bool started = false;
+	bool started = true;
 	
 	#endregion
 	
@@ -41,7 +41,7 @@ public class Timer : MonoBehaviour
 	
 	/// <summary>
 	/// Gets whether or not the timer has finished running
-	/// This property returns false if the timer has never been started
+	/// This property returns true if the timer has never been started
 	/// </summary>
 	/// <value>true if finished; otherwise, false.</value>
 	public bool Finished
