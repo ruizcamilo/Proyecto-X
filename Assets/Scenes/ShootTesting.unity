@@ -132,7 +132,6 @@ GameObject:
   - component: {fileID: 285224891}
   - component: {fileID: 285224890}
   - component: {fileID: 285224889}
-  - component: {fileID: 285224888}
   - component: {fileID: 285224892}
   m_Layer: 0
   m_Name: Main Camera
@@ -141,21 +140,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &285224888
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 285224887}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a38b443a13e575842acf6bb754539dba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  smoothing: 0.05
-  offset: {x: 0, y: 0, z: 1}
 --- !u!81 &285224889
 AudioListener:
   m_ObjectHideFlags: 0
@@ -233,9 +217,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a38b443a13e575842acf6bb754539dba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 2050988782}
   smoothing: 0.05
-  offset: {x: 0, y: 2, z: -5}
+  offset: {x: 0, y: 2, z: -4}
 --- !u!1 &399634510
 GameObject:
   m_ObjectHideFlags: 0
@@ -567,11 +551,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7954736367113432698, guid: 663775e21e91d0841b2fd31ec9976f90,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 663775e21e91d0841b2fd31ec9976f90, type: 3}
 --- !u!1 &2050988781 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7954736367113432582, guid: 663775e21e91d0841b2fd31ec9976f90,
+    type: 3}
+  m_PrefabInstance: {fileID: 2050988780}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2050988782 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7954736367113432697, guid: 663775e21e91d0841b2fd31ec9976f90,
     type: 3}
   m_PrefabInstance: {fileID: 2050988780}
   m_PrefabAsset: {fileID: 0}
@@ -587,9 +582,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5879fce7f4571d24784e3e21fa1771f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  invulnerabilityDuration: 5
-  invulnerabilityRecovery: 5
-  invulnerabilityFrame: 0.5
+  invulnerabilityDuration: 2
+  invulnerabilityRecovery: 2
+  invulnerabilityFrame: 0.2
 --- !u!483693784 &906873142173786038
 TilemapRenderer:
   m_ObjectHideFlags: 0

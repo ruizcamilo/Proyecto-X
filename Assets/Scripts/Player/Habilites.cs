@@ -16,9 +16,9 @@ public class Habilites : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _invDurationTimer = new Timer();
+        _invDurationTimer = gameObject.AddComponent<Timer>();
         _invDurationTimer.Duration = invulnerabilityDuration;
-        _invRecoveryTimer = new Timer();
+        _invRecoveryTimer = gameObject.AddComponent<Timer>();
         _invRecoveryTimer.Duration = invulnerabilityRecovery;
         _hurtBox = GetComponent<Collider2D>();
         _renderer = GetComponent<SpriteRenderer>();

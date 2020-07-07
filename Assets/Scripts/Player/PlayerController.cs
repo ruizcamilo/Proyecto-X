@@ -211,6 +211,7 @@ public class PlayerController : MonoBehaviour
 
     void OnBecameInvisible()
     {
+        if(_renderer.enabled)
         transform.position = new Vector3(-2, 0, 0);
     }
 
