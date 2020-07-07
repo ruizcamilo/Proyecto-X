@@ -507,6 +507,11 @@ PrefabInstance:
       propertyPath: dashSpeed
       value: 60
       objectReference: {fileID: 0}
+    - target: {fileID: 7954736367113432696, guid: 663775e21e91d0841b2fd31ec9976f90,
+        type: 3}
+      propertyPath: Max_health
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7954736367113432697, guid: 663775e21e91d0841b2fd31ec9976f90,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -570,12 +575,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2050988780}
   m_PrefabAsset: {fileID: 0}
---- !u!58 &2050988782 stripped
-CircleCollider2D:
-  m_CorrespondingSourceObject: {fileID: 7954736366048772308, guid: 663775e21e91d0841b2fd31ec9976f90,
-    type: 3}
-  m_PrefabInstance: {fileID: 2050988780}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2050988783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -588,7 +587,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5879fce7f4571d24784e3e21fa1771f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  body: {fileID: 2050988782}
   invulnerabilityDuration: 5
   invulnerabilityRecovery: 5
   invulnerabilityFrame: 0.5
