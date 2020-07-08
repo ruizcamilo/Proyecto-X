@@ -2446,8 +2446,6 @@ PrefabInstance:
         type: 3}
       propertyPath: ability2
       value: GravityMess
-      propertyPath: Max_healt
-      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7954736367113432697, guid: 663775e21e91d0841b2fd31ec9976f90,
         type: 3}
