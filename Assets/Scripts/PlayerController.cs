@@ -5,13 +5,19 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    //Movimiento
+    private bool jump, walk, dash;
+    private bool shoot;
+    private RaycastHit2D _hit;
+    private Vector2 _inputAxis;
     public float maxspeed;
     public float dashSpeed;
     public float speed;
     public float maxDashSpeed;
     public bool grounded;
     public float jumpPower;
-
+    public LayerMask pisoLayerMask;
+    
     //Factores de debuff
     public float debuffTime = 10f;
     public float debuffFactorSlow = 3f;
@@ -36,13 +42,6 @@ public class PlayerController : MonoBehaviour
     bool _playerIsSingleJump = false;
 
 
-    private bool jump, walk,dash;
-    private bool shoot;
-    private RaycastHit2D _hit;
-    private Vector2 _inputAxis;
-
-    public LayerMask pisoLayerMask;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -59,8 +58,8 @@ public class PlayerController : MonoBehaviour
     {
         //Variable para evitar que se hagan actualizaciones si el jugador no se puede mover o el juego está pausado
         //Falta implementar la parte de pausar.
-        if (!playerCanMove)
-            return;
+        //if (!playerCanMove)
+        //    return;
 
         anim.SetFloat("Speed", Mathf.Abs(rb2d.velocity.x));
         anim.SetBool("Grounded", IsGrounded());
@@ -159,6 +158,8 @@ public class PlayerController : MonoBehaviour
         {
             anim.SetBool("Shoot", false);
         }
+
+   
 
     }
 
