@@ -12,34 +12,48 @@ public class Patrulla : MonoBehaviour
     public LayerMask pisoLayerMask;
 
     public Transform detectaSuelo;
-    public CircleCollider2D cc;
-    public BoxCollider2D pared;
+    public BoxCollider2D bc;
     public SpriteRenderer Oldi;
     public Sprite second;
     private float hp = 40;
+
+    void Start()
+    {
+        Debug.Log("Start called");
+        StartCoroutine(startGameCoroutine());
+    }
+
+    IEnumerator startGameCoroutine()
+    {
+        //Print the time of when the function is first called.
+        Debug.Log("Started Coroutine at timestamp : " + Time.time);
+
+        //yield on a new YieldInstruction that waits for 5 seconds.
+        yield return new WaitForSeconds(5);
+
+        //After we have waited 5 seconds print the time again.
+        Debug.Log("Finished Coroutine at timestamp : " + Time.time);
+    }
+
     private void Update()
     {
-        
+
         transform.Translate(Vector2.right * velocidad * Time.deltaTime);
-       // _hit = Physics2D.BoxCast(box.bounds.center, box.bounds.size, 0f, Vector2.down, .1f, pisoLayerMask);
+        // _hit = Physics2D.BoxCast(box.bounds.center, box.bounds.size, 0f, Vector2.down, .1f, pisoLayerMask);
 
         RaycastHit2D infoSuelo = Physics2D.Raycast(detectaSuelo.position, Vector2.down);
         Animator obs = GetComponent<Animator>();
-        if(hp<=0)
+        if (hp <= 0)
         {
             velocidad = 0;
             obs.enabled = false;
-            Oldi.sprite=second;
+            Oldi.sprite = second;
 
         }
-        if(cc!=null&&cc.IsTouching(pared))
-        {
-            transform.eulerAngles = new Vector3(0, -180, 0);
-            movDerecha = false;
-        }
+
         if (infoSuelo.collider == false)
         {
-            if(movDerecha)
+            if (movDerecha)
             {
                 transform.eulerAngles = new Vector3(0, -180, 0);
                 movDerecha = false;
@@ -50,9 +64,22 @@ public class Patrulla : MonoBehaviour
                 movDerecha = true;
             }
         }
-        
+
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.layer == 12 && movDerecha)
+        {
+            transform.eulerAngles = new Vector3(0, -180, 0);
+            movDerecha = false;
+        }
+        else
+        {
+            transform.eulerAngles = new Vector3(0, -0, 0);
+            movDerecha = true;
+        }
+    }
 
     void OnTriggerEnter2D(Collider2D hitInfo)
     {
