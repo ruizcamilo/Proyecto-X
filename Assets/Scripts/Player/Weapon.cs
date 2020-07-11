@@ -15,6 +15,7 @@ public class Weapon : MonoBehaviour
     public GameObject bulletPrefab;
     public GameObject bigBulletPrefab;
     public GameObject shooter;
+    public LayerMask enemyLayerMask;
 
     private Vector2 _direction;
     private int _facingRight;
@@ -45,7 +46,9 @@ public class Weapon : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            type = (type - 1) % maxWeapons;
+            type = type - 1;
+            if (type == -1)
+                type = maxWeapons - 1;
         }
         if(Input.GetKeyDown(KeyCode.Space))
         {
@@ -95,6 +98,9 @@ public class Weapon : MonoBehaviour
                     break;
                 case 2:
                     Instantiate(bigBulletPrefab, _firePoint.position, rot);
+                    break;
+                case 3:
+                    
                     break;
                 default:
                     print("There's been an error");

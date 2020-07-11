@@ -228,6 +228,9 @@ public class PlayerController : MonoBehaviour
             case 2:
                 this._renderer.material.color = Color.blue;
                 break;
+            case 3:
+                _renderer.material.color = Color.green;
+                break;
             default:
                 break;
         }
