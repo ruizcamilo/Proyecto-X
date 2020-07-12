@@ -17,6 +17,7 @@ public class Weapon : MonoBehaviour
     public GameObject shooter;
     public LayerMask enemyLayerMask;
 
+    private GameObject _superShot;
     private Vector2 _direction;
     private int _facingRight;
 
@@ -35,6 +36,7 @@ public class Weapon : MonoBehaviour
             _timers[i] = gameObject.AddComponent<Timer>();
             _timers[i].Duration = times[i];
         }
+        _superShot = _firePoint.Find("SuperShot").gameObject;
         
     }
 
@@ -52,7 +54,7 @@ public class Weapon : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            Shoot();
+            StartCoroutine(Shoot());
         }
         
         _direction = new Vector2(Input.GetAxisRaw("Horizontal")*_facingRight, Input.GetAxisRaw("Vertical"));
@@ -68,12 +70,11 @@ public class Weapon : MonoBehaviour
         if(_direction.x == 0 && _direction.y != 1)
         {
             _direction = new Vector2(1, 0);
-
         }
         _firePoint.localPosition = _direction * radius;
     }
 
-    void Shoot()
+    IEnumerator Shoot()
     {
         // Shoot if timer is finished
         if (_timers[type].Finished)
@@ -81,6 +82,7 @@ public class Weapon : MonoBehaviour
             float angle = Vector2.Angle(new Vector2(_facingRight, 0), _direction);
             if (_direction.y < 0)
                 angle *= -1;
+            _firePoint.rotation = Quaternion.Euler(_firePoint.rotation.x, _firePoint.rotation.y, angle);
 
             Quaternion rot = Quaternion.Euler(_firePoint.rotation.x, _firePoint.rotation.y, angle);
 
@@ -100,7 +102,9 @@ public class Weapon : MonoBehaviour
                     Instantiate(bigBulletPrefab, _firePoint.position, rot);
                     break;
                 case 3:
-                    
+                    _superShot.SetActive(true);
+                    yield return new WaitForSeconds(0.2f);
+                    _superShot.SetActive(false);
                     break;
                 default:
                     print("There's been an error");

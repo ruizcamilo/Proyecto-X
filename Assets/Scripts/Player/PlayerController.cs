@@ -140,7 +140,7 @@ public class PlayerController : MonoBehaviour
 
         if (!_fixed)
         {
-            if (Input.GetKeyDown(KeyCode.E) && _dash)
+            if (Input.GetKeyDown(KeyCode.Z) && _dash)
             {
                 Debug.Log("dashprron");
                 _rigidbody.velocity = new Vector2(_movement.x * dashSpeed, _rigidbody.velocity.y);
