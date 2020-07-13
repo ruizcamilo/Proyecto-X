@@ -66,8 +66,7 @@ public class PlayerController : MonoBehaviour
         inmunnity = gameObject.AddComponent<Timer>();
         inmunnity.Duration =0.5f;
         inmunnity.Run();
-
-
+        _facingRight = true;
     }
 
     // Update is called once per frame
@@ -153,7 +152,7 @@ public class PlayerController : MonoBehaviour
 
         if (!_fixed)
         {
-            if (Input.GetKeyDown(KeyCode.E) && _dash)
+            if (Input.GetKeyDown(KeyCode.Z) && _dash)
             {
                 Debug.Log("dashprron");
                 _rigidbody.velocity = new Vector2(_movement.x * dashSpeed, _rigidbody.velocity.y);
@@ -224,6 +223,7 @@ public class PlayerController : MonoBehaviour
 
     void OnBecameInvisible()
     {
+        if(_renderer.enabled)
         transform.position = new Vector3(-2, 0, 0);
     }
 
@@ -239,6 +239,9 @@ public class PlayerController : MonoBehaviour
                 break;
             case 2:
                 this._renderer.material.color = Color.blue;
+                break;
+            case 3:
+                _renderer.material.color = Color.green;
                 break;
             default:
                 break;
