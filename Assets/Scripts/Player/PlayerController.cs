@@ -13,6 +13,9 @@ public class PlayerController : MonoBehaviour
     public Transform groundPoint;
     public float groundRadius;
     public float jumpPower;
+    public string ability1;
+    public string ability2;
+
     private float health;
     public float Max_health;
 
@@ -94,6 +97,15 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             _fixed = false;
+        }
+        if(Input.GetKeyDown(KeyCode.Q))
+        {
+            Ability(1);
+        }
+
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            Ability(2);
         }
 
         //_inputAxis = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
@@ -241,6 +253,33 @@ public class PlayerController : MonoBehaviour
         return Physics2D.OverlapCircle(groundPoint.position, groundRadius, pisoLayerMask);
     }
 
+    private void Ability(int choise)
+    {
+        Debug.Log("Habilidad "+choise);
+        string perform="";
+        if(choise == 1)
+        {
+            perform = this.ability1;
+        }
+        else if(choise == 2)
+        {
+            perform = this.ability2;
+        }
+        switch(perform)
+        {
+            case "SuperShot":
+                Debug.Log("Habilidad "+choise+" "+perform);
+                break;
+            case "Invisibility":
+                Debug.Log("Habilidad "+choise+" "+perform);
+                break;
+            case "GravityMess":
+                Debug.Log("Habilidad "+choise+" "+perform);
+                break;
+            default:
+                Debug.Log("There's no ability assigned");
+                break;
+        }   
+    }
 
-    
 }
