@@ -12,6 +12,11 @@ public class MostrarMonedas : MonoBehaviour
     {
         textoMonedas.text = "MONEDAS: " + totalMonedas;
 
-        if (Input.GetKeyDown(KeyCode.RightAlt)) totalMonedas++;
+        if (Input.GetKeyDown(KeyCode.RightAlt)) aumentarMonedas(1);
+    }
+
+    public void aumentarMonedas(int pMonedas)
+    {
+        totalMonedas += pMonedas;
     }
 }

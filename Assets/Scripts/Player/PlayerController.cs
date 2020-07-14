@@ -5,6 +5,11 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+
+    public GameObject UI;
+    [HideInInspector]
+    public UI_Controller scriptUI;
+
     public float maxSpeed;
     public float dashSpeed;
     public float speed;
@@ -55,6 +60,8 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        scriptUI = UI.GetComponent<UI_Controller>();
         _box = transform.GetComponent<BoxCollider2D>();
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
@@ -63,6 +70,7 @@ public class PlayerController : MonoBehaviour
         _original = _renderer.material.color;
         _box = GetComponent<BoxCollider2D>();
         health = Max_health;
+        scriptUI.setVida((int)Max_health);
         inmunnity = gameObject.AddComponent<Timer>();
         inmunnity.Duration =0.5f;
         inmunnity.Run();
@@ -75,7 +83,7 @@ public class PlayerController : MonoBehaviour
     {
         if (_box.IsTouchingLayers()&&inmunnity.Finished)
         {
-            health -= 1;
+            takeDamage(1);
             inmunnity.Run();
             //Debug.Log("vida: "+healt);
             if(health ==0)
@@ -83,6 +91,7 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("U DED");
                 OnBecameInvisible();
                 health = Max_health;
+                scriptUI.setVida((int)Max_health);
             }
         }
 
@@ -122,6 +131,12 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    void takeDamage(int pDamage)
+    {
+        health -= pDamage;
+        scriptUI.reducirPuntosVida(pDamage);
+        Debug.Log("Player took: " + pDamage + " damage");
+    }
 
     void FixedUpdate()
     {
