@@ -4,38 +4,34 @@ using UnityEngine;
 
 public class UI_Controller : MonoBehaviour
 {
-    GameObject textoVida;
+    public GameObject textoVida;
     MostrarVida scriptVida;
-    GameObject textoMonedas;
+    public GameObject textoMonedas;
     MostrarMonedas scriptMonedas;
 
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         textoVida = this.transform.GetChild(0).gameObject;
         textoMonedas = this.transform.GetChild(1).gameObject;
         scriptVida = textoVida.GetComponent<MostrarVida>();
         scriptMonedas = textoMonedas.GetComponent<MostrarMonedas>();
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            scriptVida.reducirPuntosVida(1);
-        }
     }
 
     public void setVida(int pPuntos)
     {
+        Debug.Log("Ya debería existir script vida"+ (scriptVida != null));
         scriptVida.setPuntosVida(pPuntos);
     }
 
     public void reducirPuntosVida(int pPuntos)
     {
         scriptVida.reducirPuntosVida(pPuntos);
+    }
+
+    public void recolectarMonedas (int pMonedas)
+    {
+        scriptMonedas.recolectarMonedas(pMonedas);
     }
 }

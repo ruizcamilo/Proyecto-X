@@ -14,7 +14,7 @@ public class Patrulla : MonoBehaviour
     public Transform detectaSuelo;
     public BoxCollider2D bc;
     public SpriteRenderer Oldi;
-    public Sprite second;
+    public GameObject moneda;
     private float hp = 40;
 
     void Start()
@@ -47,7 +47,8 @@ public class Patrulla : MonoBehaviour
         {
             velocidad = 0;
             obs.enabled = false;
-            Oldi.sprite = second;
+            Instantiate(moneda, this.transform.position, this.transform.rotation);
+            Destroy(this.gameObject);
 
         }
 

@@ -24,6 +24,8 @@ public class PlayerController : MonoBehaviour
     private float health;
     public float Max_health;
 
+    public int monedas; 
+
     //Factores de debuff
     public float debuffTime = 10f;
     public float debuffFactorSlow = 3f;
@@ -60,7 +62,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        monedas = 0;
         scriptUI = UI.GetComponent<UI_Controller>();
         _box = transform.GetComponent<BoxCollider2D>();
         _rigidbody = GetComponent<Rigidbody2D>();
@@ -70,12 +72,10 @@ public class PlayerController : MonoBehaviour
         _original = _renderer.material.color;
         _box = GetComponent<BoxCollider2D>();
         health = Max_health;
-        scriptUI.setVida((int)Max_health);
         inmunnity = gameObject.AddComponent<Timer>();
         inmunnity.Duration =0.5f;
         inmunnity.Run();
-
-
+        scriptUI.setVida((int)Max_health);
     }
 
     // Update is called once per frame
@@ -258,6 +258,13 @@ public class PlayerController : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    public void recolectarMonedas(int pMonedas)
+    {
+        monedas += pMonedas;
+        scriptUI.recolectarMonedas(pMonedas);
+        Debug.Log("Se recolectaron " + pMonedas + " y el total ahora es " + monedas);
     }
 
     private bool IsGrounded()

@@ -12,7 +12,6 @@ public class MostrarVida : MonoBehaviour
     {
         textoVida.text = "VIDA: "+ puntosVida;
 
-        if (Input.GetKeyDown(KeyCode.Space)) reducirPuntosVida(1);
     }
 
     public void setPuntosVida(int pPuntos)
