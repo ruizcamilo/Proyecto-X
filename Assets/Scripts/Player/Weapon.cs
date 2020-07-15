@@ -103,7 +103,7 @@ public class Weapon : MonoBehaviour
                     break;
                 case 3:
                     _superShot.SetActive(true);
-                    yield return new WaitForSeconds(0.2f);
+                    yield return new WaitForSeconds(1f);
                     _superShot.SetActive(false);
                     break;
                 default:
