@@ -42,6 +42,8 @@ public class PlayerController : MonoBehaviour
     private bool _playerIsHeavy = false;
     private bool _playerIsSingleJump = false;
 
+    private bool _playerIsLight = false;
+
     // States
     private bool _jump, _walk, _dash;
     private bool _grounded;
@@ -107,6 +109,10 @@ public class PlayerController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.E))
         {
             Ability(2);
+        }
+
+        if(Input.GetKeyDown(KeyCode.R) && _playerIsLight != true) {
+            slowFall();
         }
 
         //_inputAxis = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
@@ -220,6 +226,18 @@ public class PlayerController : MonoBehaviour
         _rigidbody.gravityScale /= debuffFactorHeavy;
         _playerIsHeavy = true;
 
+    }
+
+    public void slowFall() {
+        _playerIsLight = true;
+        _rigidbody.gravityScale /= debuffFactorHeavy;
+        StartCoroutine(slowFallRoutine());
+    }
+
+    IEnumerator slowFallRoutine() {
+        yield return new WaitForSecondsRealtime(5);
+        _rigidbody.gravityScale *= debuffFactorHeavy;
+        _playerIsLight = false;
     }
 
     void OnBecameInvisible()
