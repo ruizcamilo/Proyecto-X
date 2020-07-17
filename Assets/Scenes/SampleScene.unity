@@ -1268,12 +1268,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.5}
   m_EdgeRadius: 0
---- !u!1 &1238086714 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4562997134887667125, guid: 74a3568e72cd28846aaa41ae74c58552,
-    type: 3}
-  m_PrefabInstance: {fileID: 1746894744}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1248910089
 GameObject:
   m_ObjectHideFlags: 0
@@ -1740,12 +1734,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 67b40209b44f68c468245735878314d8, type: 3}
---- !u!1 &1599971831 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4562997133415232343, guid: 74a3568e72cd28846aaa41ae74c58552,
-    type: 3}
-  m_PrefabInstance: {fileID: 1746894744}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1718121139 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6732871523008137670, guid: 09f93497ad3d9a9449e436976b9a16a9,
@@ -2270,20 +2258,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1746894744}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2011098805
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2011098804}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30079e1719487e340a5d78e16b2cc137, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textoVida: {fileID: 1599971831}
-  textoMonedas: {fileID: 1238086714}
 --- !u!1001 &2245783268211821501
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2709,11 +2683,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7954736367113432580, guid: 663775e21e91d0841b2fd31ec9976f90,
-        type: 3}
-      propertyPath: m_Offset.y
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 7954736367113432582, guid: 663775e21e91d0841b2fd31ec9976f90,
         type: 3}
       propertyPath: m_Name
@@ -2721,39 +2690,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7954736367113432696, guid: 663775e21e91d0841b2fd31ec9976f90,
         type: 3}
-      propertyPath: pisoLayerMask.m_Bits
-      value: 512
-      objectReference: {fileID: 0}
-    - target: {fileID: 7954736367113432696, guid: 663775e21e91d0841b2fd31ec9976f90,
-        type: 3}
-      propertyPath: dashSpeed
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 7954736367113432696, guid: 663775e21e91d0841b2fd31ec9976f90,
-        type: 3}
-      propertyPath: maxDashSpeed
-      value: 70
-      objectReference: {fileID: 0}
-    - target: {fileID: 7954736367113432696, guid: 663775e21e91d0841b2fd31ec9976f90,
-        type: 3}
-      propertyPath: ability1
-      value: SuperShot
-      objectReference: {fileID: 0}
-    - target: {fileID: 7954736367113432696, guid: 663775e21e91d0841b2fd31ec9976f90,
-        type: 3}
-      propertyPath: ability2
-      value: GravityMess
-      objectReference: {fileID: 0}
-    - target: {fileID: 7954736367113432696, guid: 663775e21e91d0841b2fd31ec9976f90,
-        type: 3}
       propertyPath: UI
       value: 
       objectReference: {fileID: 2011098804}
-    - target: {fileID: 7954736367113432696, guid: 663775e21e91d0841b2fd31ec9976f90,
-        type: 3}
-      propertyPath: Max_health
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 7954736367113432697, guid: 663775e21e91d0841b2fd31ec9976f90,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2809,11 +2748,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7954736367219156047, guid: 663775e21e91d0841b2fd31ec9976f90,
-        type: 3}
-      propertyPath: m_Icon
-      value: 
-      objectReference: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000,
-        type: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 663775e21e91d0841b2fd31ec9976f90, type: 3}

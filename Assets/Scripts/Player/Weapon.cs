@@ -54,17 +54,14 @@ public class Weapon : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             selectedWeapon = WeaponType.normalShot;
-            Debug.Log("Normal shot selected: " + selectedWeapon);
         }
         else if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             selectedWeapon = WeaponType.fanShot;
-            Debug.Log("Fan shot selected: " + selectedWeapon);
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             selectedWeapon = WeaponType.heavyShot;
-            Debug.Log("Heavy shot selected: " + selectedWeapon);
         }
         if(Input.GetKeyDown(KeyCode.Space))
         {
@@ -93,6 +90,7 @@ public class Weapon : MonoBehaviour
     public void setWeaponType (WeaponType weapontype)
     {
         selectedWeapon = weapontype;
+        Debug.Log("Setting weapon type to: " + weapontype);
     }
 
     void Shoot()
