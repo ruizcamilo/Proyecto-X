@@ -36,7 +36,7 @@ public class Weapon : MonoBehaviour
             _timers[i] = gameObject.AddComponent<Timer>();
             _timers[i].Duration = times[i];
         }
-        _superShot = _firePoint.Find("SuperShot").gameObject;
+        _superShot = transform.Find("SuperShot").gameObject;
         
     }
 
@@ -82,8 +82,7 @@ public class Weapon : MonoBehaviour
             float angle = Vector2.Angle(new Vector2(_facingRight, 0), _direction);
             if (_direction.y < 0)
                 angle *= -1;
-            _firePoint.rotation = Quaternion.Euler(_firePoint.rotation.x, _firePoint.rotation.y, angle);
-
+            Debug.Log(_facingRight);
             Quaternion rot = Quaternion.Euler(_firePoint.rotation.x, _firePoint.rotation.y, angle);
 
             switch (type)
@@ -102,6 +101,7 @@ public class Weapon : MonoBehaviour
                     Instantiate(bigBulletPrefab, _firePoint.position, rot);
                     break;
                 case 3:
+                    _superShot.transform.localPosition = new Vector2( radius, 0);
                     _superShot.SetActive(true);
                     yield return new WaitForSeconds(0.2f);
                     _superShot.SetActive(false);
