@@ -7,7 +7,7 @@ public class WeaponSelectSystem
 {
     private Weapon weaponPlayer;
 
-    private List<selectorWeapon> weaponsList;
+    private List<SelectorSystem> weaponsList;
 
     public enum WeaponType
     {
@@ -19,21 +19,21 @@ public class WeaponSelectSystem
     public WeaponSelectSystem(Weapon weaponPlayer)
     {
         this.weaponPlayer = weaponPlayer;
-        weaponsList = new List<selectorWeapon>();
+        weaponsList = new List<SelectorSystem>();
 
-        weaponsList.Add(new selectorWeapon
+        weaponsList.Add(new SelectorSystem
         {
             weaponType = WeaponType.NormalShot,
             activateWeaponAction = () => weaponPlayer.setWeaponType(Weapon.WeaponType.normalShot)
         });
 
-        weaponsList.Add(new selectorWeapon
+        weaponsList.Add(new SelectorSystem
         {
             weaponType = WeaponType.FanShot,
             activateWeaponAction = () => weaponPlayer.setWeaponType(Weapon.WeaponType.fanShot)
         });
 
-        weaponsList.Add(new selectorWeapon
+        weaponsList.Add(new SelectorSystem
         {
             weaponType = WeaponType.HeavyShot,
             activateWeaponAction = () => weaponPlayer.setWeaponType(Weapon.WeaponType.heavyShot)
@@ -56,10 +56,25 @@ public class WeaponSelectSystem
         }
     }
 
-    public class selectorWeapon
+    public List<SelectorSystem> GetSelectorSystemsList()
+    {
+        return weaponsList;
+    }
+
+    public class SelectorSystem
     {
         public WeaponType weaponType;
 
         public Action activateWeaponAction;
+
+        public Sprite getSprite()
+        {
+            switch (weaponType)
+            {
+                default:
+                case WeaponType.NormalShot:
+                    break;
+            }
+        }
     }
 }
