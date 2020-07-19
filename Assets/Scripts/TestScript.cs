@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Testing : MonoBehaviour
+public class TestScript : MonoBehaviour
 {
-    public static Testing Instance { get; private set; }
+    public static TestScript Instance { get; private set; }
     [SerializeField] private Weapon weaponPlayer;
-
+    [SerializeField] private UI_Selector uiSelector;
     public Sprite normalShot;
 
     public Sprite fanShot;
@@ -14,7 +14,6 @@ public class Testing : MonoBehaviour
     public Sprite HeavyShot;
 
     private WeaponSelectSystem weaponSelectSystem;
-
 
     private void Awake()
     {
@@ -24,6 +23,11 @@ public class Testing : MonoBehaviour
     private void Start()
     {
         weaponSelectSystem = new WeaponSelectSystem(weaponPlayer);
+        uiSelector.setWeaponSelectSystem(weaponSelectSystem);
+    }
+    IEnumerator waitCoroutine()
+    {
+        yield return new WaitForSecondsRealtime((float)0.5);
     }
 
     // Update is called once per frame

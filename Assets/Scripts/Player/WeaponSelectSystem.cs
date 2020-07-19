@@ -72,8 +72,9 @@ public class WeaponSelectSystem
             switch (weaponType)
             {
                 default:
-                case WeaponType.NormalShot:
-                    break;
+                case WeaponType.NormalShot: return TestScript.Instance.normalShot;
+                case WeaponType.FanShot: return TestScript.Instance.fanShot;
+                case WeaponType.HeavyShot: return TestScript.Instance.HeavyShot;
             }
         }
     }
