@@ -74,6 +74,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        print(this.health);
         if (_box.IsTouchingLayers()&&inmunnity.Finished)
         {
             health -= 1;
@@ -271,6 +272,24 @@ public class PlayerController : MonoBehaviour
         return Physics2D.OverlapCircle(groundPoint.position, groundRadius, pisoLayerMask);
     }
 
+    public void Damage(float dam)
+    {
+        this.health -= dam;
+    }
+
+    public IEnumerator KnockBack(float knockDur, float knockPow, Vector3 knockDir)
+    {
+        float timer = 0;
+        while (knockDur > timer)
+        {
+            timer+=Time.deltaTime;
+            _rigidbody.AddForce(new Vector3(knockDir.x * -100, knockDir.y * knockPow, transform.position.x));
+        }
+        yield return 0;
+    }
+
+
+    //¿Esto no lo utilizaron al final para las habilidades?
     private void Ability(int choise)
     {
         Debug.Log("Habilidad "+choise);
