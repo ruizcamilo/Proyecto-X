@@ -31,10 +31,11 @@ public class UI_Selector : MonoBehaviour
             weaponSlotTransform.gameObject.SetActive(true);
             RectTransform weaponSlotRectTransform = weaponSlotTransform.GetComponent<RectTransform>();
             weaponSlotRectTransform.anchoredPosition = new Vector2(100f * Mathf.Sin(i*(Mathf.PI/2)),100f * Mathf.Cos(i* (Mathf.PI / 2)));
-            Debug.Log("weaponslottransform: " + weaponSlotTransform == null);
-            Debug.Log("weapon: " + weapon == null);
-            Debug.Log("weaponslottransform item image: " + weaponSlotTransform.Find("itemImage") == null);
-            weaponSlotTransform.Find("itemImage").GetComponent<Image>().sprite = weapon.getSprite();
+            Debug.Log("weaponslottransform: " + (weaponSlotTransform == null));
+            Debug.Log("weapon: " + (weapon == null));
+            Debug.Log("weaponslottransform item image: " + (weaponSlotTransform.Find("itemImage") == null));
+            Debug.Log("weapon sprite " + (weapon.getSprite() == null));
+            weaponSlotTransform.Find("ItemImage").GetComponent<Image>().sprite = weapon.getSprite();
             Debug.Log("Paso por update list: " + i);
         }
     }
