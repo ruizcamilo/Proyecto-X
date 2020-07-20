@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7788250704974855357}
   m_Layer: 10
   m_Name: BigBullet
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -148,6 +148,5 @@ MonoBehaviour:
   speed: 20
   maxlife: 30
   life: 0
-  rb: {fileID: 6847167884165500314}
   BulletEnd: {fileID: 4571416289066457508, guid: 7dc25bcbca1e0ca4187cedb5008cf39b,
     type: 3}

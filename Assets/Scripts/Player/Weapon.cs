@@ -104,7 +104,7 @@ public class Weapon : MonoBehaviour
                 case 3:
                     _superShot.transform.localPosition = new Vector2( radius, 0);
                     _superShot.SetActive(true);
-                    yield return new WaitForSeconds(1f);
+                    yield return new WaitForSeconds(0.2f);
                     _superShot.SetActive(false);
                     break;
                 default:

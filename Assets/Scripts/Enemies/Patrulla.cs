@@ -56,13 +56,19 @@ public class Patrulla : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D hitInfo)
     {
-       
 
-        if (hitInfo.name.Contains("Bullet"))
+        if (hitInfo.CompareTag("Bullet"))
         {
             Bullet bul = hitInfo.GetComponent<Bullet>();
-
-            hp -= bul.damage;
+            if(bul != null)
+            {
+                hp -= bul.damage;
+            }
+            else
+            {
+                hp -= hitInfo.GetComponent<SuperShot>().damage;
+            }
+            Debug.Log(hp);
         }
         
     }
