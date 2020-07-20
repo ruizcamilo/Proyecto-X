@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -8637674469533563168}
   m_Layer: 10
   m_Name: Bullet
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -148,4 +148,5 @@ MonoBehaviour:
   speed: 20
   maxlife: 30
   life: 0
-  BulletEnd: {fileID: 8100151067163490482, guid: 556d650ea207788448ac8fe36b75819d,type: 3}
+  BulletEnd: {fileID: 8100151067163490482, guid: 556d650ea207788448ac8fe36b75819d,
+    type: 3}

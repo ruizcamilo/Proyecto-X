@@ -101,6 +101,7 @@ public class PlayerController : MonoBehaviour
         {
             _fixed = false;
         }
+
         if(Input.GetKeyDown(KeyCode.Q))
         {
             Ability(1);

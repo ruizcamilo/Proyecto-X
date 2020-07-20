@@ -84,7 +84,8 @@ public class Weapon : MonoBehaviour
                 angle *= -1;
             Debug.Log(_facingRight);
             Quaternion rot = Quaternion.Euler(_firePoint.rotation.x, _firePoint.rotation.y, angle);
-
+            
+            shooter.GetComponent<Animator>().SetTrigger("Shoot");
             switch (type)
             {
                 case 0:
@@ -112,7 +113,6 @@ public class Weapon : MonoBehaviour
             }
             _timers[type].Run();
 
-            shooter.GetComponent<Animator>().SetTrigger("Shoot");
         }
 
     }
