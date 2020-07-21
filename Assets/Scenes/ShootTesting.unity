@@ -198,7 +198,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &252269124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -499,7 +499,7 @@ PrefabInstance:
     - target: {fileID: 3645873341786510986, guid: 5d60049389b3941d19e9626544bb5bb7,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3645873341786511029, guid: 5d60049389b3941d19e9626544bb5bb7,
         type: 3}
@@ -605,25 +605,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1861212509 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2134241129, guid: 663775e21e91d0841b2fd31ec9976f90,
-    type: 3}
-  m_PrefabInstance: {fileID: 2050988780}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1861212513
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1861212509}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d36318d9c6e41974fa5b244128028653, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 10
 --- !u!1001 &1897433070
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -757,6 +738,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1861212513, guid: 663775e21e91d0841b2fd31ec9976f90, type: 3}
+      propertyPath: damage
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 7954736367113432582, guid: 663775e21e91d0841b2fd31ec9976f90,
         type: 3}
       propertyPath: m_Name

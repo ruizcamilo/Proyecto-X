@@ -74,7 +74,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        print(this.health);
         if (_box.IsTouchingLayers()&&inmunnity.Finished)
         {
             health -= 1;
