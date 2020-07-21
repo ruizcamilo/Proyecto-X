@@ -19,6 +19,8 @@ public class Bullet : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         this.life = 0f;
+        _rigidbody.velocity = transform.right * speed;
+
     }
 
     void Update()
@@ -33,7 +35,6 @@ public class Bullet : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _rigidbody.velocity = transform.right * speed;
     }
 
     void OnTriggerEnter2D(Collider2D hitInfo)

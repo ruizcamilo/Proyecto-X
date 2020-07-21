@@ -68,7 +68,6 @@ public class Patrulla : MonoBehaviour
             {
                 hp -= hitInfo.GetComponent<SuperShot>().damage;
             }
-            Debug.Log(hp);
         }
         
     }

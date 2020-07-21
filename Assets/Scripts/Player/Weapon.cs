@@ -82,7 +82,6 @@ public class Weapon : MonoBehaviour
             float angle = Vector2.Angle(new Vector2(_facingRight, 0), _direction);
             if (_direction.y < 0)
                 angle *= -1;
-            Debug.Log(_facingRight);
             Quaternion rot = Quaternion.Euler(_firePoint.rotation.x, _firePoint.rotation.y, angle);
             
             shooter.GetComponent<Animator>().SetTrigger("Shoot");

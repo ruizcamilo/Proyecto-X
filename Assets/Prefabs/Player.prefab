@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2134241130}
   - component: {fileID: 2134241132}
   - component: {fileID: 2134241131}
+  - component: {fileID: 1861212513}
   m_Layer: 10
   m_Name: SuperShot
   m_TagString: Bullet
@@ -155,6 +156,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 10.1, y: 0.1}
   m_EdgeRadius: 0
+--- !u!114 &1861212513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2134241129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d36318d9c6e41974fa5b244128028653, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
 --- !u!1 &969493299638177716
 GameObject:
   m_ObjectHideFlags: 0
