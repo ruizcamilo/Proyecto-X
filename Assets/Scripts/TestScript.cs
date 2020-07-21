@@ -15,6 +15,8 @@ public class TestScript : MonoBehaviour
 
     private WeaponSelectSystem weaponSelectSystem;
 
+    private bool selecting= false;
+
     private void Awake()
     {
         Instance = this;
@@ -25,14 +27,30 @@ public class TestScript : MonoBehaviour
         weaponSelectSystem = new WeaponSelectSystem(weaponPlayer);
         uiSelector.setWeaponSelectSystem(weaponSelectSystem);
     }
-    IEnumerator waitCoroutine()
+    IEnumerator waitSelectingCoroutine()
     {
-        yield return new WaitForSecondsRealtime((float)0.5);
+        yield return new WaitForSecondsRealtime((float)1.5);
+        selecting = false;
     }
 
     // Update is called once per frame
     void Update()
     {
         weaponSelectSystem.Update();
+        if (selecting)
+        {
+            if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                weaponSelectSystem.selecting = false;
+                selecting = false;
+                StopCoroutine(waitSelectingCoroutine());
+            }
+        }else if(Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            selecting = true;
+            weaponSelectSystem.selecting = true;
+            StartCoroutine(waitSelectingCoroutine());
+        }
     }
+
 }

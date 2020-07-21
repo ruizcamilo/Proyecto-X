@@ -189,6 +189,7 @@ RectTransform:
   - {fileID: 4562997133415232340}
   - {fileID: 4562997134887667130}
   - {fileID: 4562997135059615634}
+  - {fileID: 7122153649612275651}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -271,6 +272,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textoVida: {fileID: 4562997133415232343}
   textoMonedas: {fileID: 4562997134887667125}
+  uiSelector: {fileID: 4562997135059615341}
 --- !u!1 &4562997133415232343
 GameObject:
   m_ObjectHideFlags: 0
@@ -792,3 +794,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25c60fd8f171cfd4c915275c7dd930b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &7260774670167726571
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7122153649612275651}
+  - component: {fileID: 1150843448775201041}
+  m_Layer: 0
+  m_Name: SelectorSpriteKeeper
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7122153649612275651
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7260774670167726571}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -798.82434, y: -346.88693, z: -6.956521}
+  m_LocalScale: {x: 0.6956521, y: 0.6956521, z: 0.6956521}
+  m_Children: []
+  m_Father: {fileID: 4562997133357084593}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1150843448775201041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7260774670167726571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12dce5502662cb94789ce1d94511104a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponPlayer: {fileID: 0}
+  uiSelector: {fileID: 4562997135059615635}
+  normalShot: {fileID: 724076939076044100, guid: dec1cf63d54e8c54381dc2c858f69b98,
+    type: 3}
+  fanShot: {fileID: -3793682818785140518, guid: dec1cf63d54e8c54381dc2c858f69b98,
+    type: 3}
+  HeavyShot: {fileID: 5388230623493139421, guid: dec1cf63d54e8c54381dc2c858f69b98,
+    type: 3}

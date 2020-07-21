@@ -8,6 +8,9 @@ public class UI_Controller : MonoBehaviour
     MostrarVida scriptVida;
     public GameObject textoMonedas;
     MostrarMonedas scriptMonedas;
+    UI_Selector scriptUISelector;
+
+    public GameObject uiSelector;
 
 
     // Start is called before the first frame update
@@ -17,6 +20,8 @@ public class UI_Controller : MonoBehaviour
         textoMonedas = this.transform.GetChild(1).gameObject;
         scriptVida = textoVida.GetComponent<MostrarVida>();
         scriptMonedas = textoMonedas.GetComponent<MostrarMonedas>();
+        uiSelector = this.transform.GetChild(2).gameObject;
+        scriptUISelector = uiSelector.GetComponent<UI_Selector>();
     }
 
     public void setVida(int pPuntos)
@@ -33,5 +38,15 @@ public class UI_Controller : MonoBehaviour
     public void recolectarMonedas (int pMonedas)
     {
         scriptMonedas.recolectarMonedas(pMonedas);
+    }
+
+    public void activarUISelector()
+    {
+        scriptUISelector.setUI_SelectorActive();
+    }
+
+    public void desactivarUISelector()
+    {
+        scriptUISelector.setUI_SelectorInactive();
     }
 }

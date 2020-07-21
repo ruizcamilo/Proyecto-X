@@ -9,6 +9,8 @@ public class WeaponSelectSystem
 
     private List<SelectorSystem> weaponsList;
 
+    public bool selecting = false;
+
     public enum WeaponType
     {
         NormalShot,
@@ -42,17 +44,20 @@ public class WeaponSelectSystem
     }
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Keypad0))
+        if (selecting)
         {
-            weaponsList[0].activateWeaponAction();
-        }
-        if (Input.GetKeyDown(KeyCode.Keypad1))
-        {
-            weaponsList[1].activateWeaponAction();
-        }
-        if (Input.GetKeyDown(KeyCode.Keypad2))
-        {
-            weaponsList[2].activateWeaponAction();
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                weaponsList[0].activateWeaponAction();
+            }
+            if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                weaponsList[1].activateWeaponAction();
+            }
+            if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                weaponsList[2].activateWeaponAction();
+            }
         }
     }
 

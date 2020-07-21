@@ -20,7 +20,7 @@ public class Weapon : MonoBehaviour
     }
 
     private int numWeapons = System.Enum.GetValues(typeof(WeaponType)).Length;
-    private WeaponType selectedWeapon= WeaponType.normalShot;
+    public WeaponType selectedWeapon= WeaponType.normalShot;
 
     public GameObject bulletPrefab;
     public GameObject bigBulletPrefab;
@@ -51,18 +51,18 @@ public class Weapon : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            selectedWeapon = WeaponType.normalShot;
-        }
-        else if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            selectedWeapon = WeaponType.fanShot;
-        }
-        else if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            selectedWeapon = WeaponType.heavyShot;
-        }
+        //if (Input.GetKeyDown(KeyCode.LeftArrow))
+        //{
+        //    selectedWeapon = WeaponType.normalShot;
+        //}
+        //else if (Input.GetKeyDown(KeyCode.UpArrow))
+        //{
+        //    selectedWeapon = WeaponType.fanShot;
+        //}
+        //else if (Input.GetKeyDown(KeyCode.RightArrow))
+        //{
+        //    selectedWeapon = WeaponType.heavyShot;
+        //}
         if(Input.GetKeyDown(KeyCode.Space))
         {
             Shoot();

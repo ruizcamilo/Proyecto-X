@@ -13,12 +13,24 @@ public class UI_Selector : MonoBehaviour
         casilla_Template = transform.Find("Casilla_Template");
         casilla_Template.gameObject.SetActive(false);
 
+        this.gameObject.SetActive(false);
+
     }
 
     public void setWeaponSelectSystem (WeaponSelectSystem weaponSelectSystem)
     {
         this.weaponSelectSystem = weaponSelectSystem;
         UpdateVisual();
+    }
+
+    public void setUI_SelectorActive()
+    {
+        this.gameObject.SetActive(true);
+    }
+
+    public void setUI_SelectorInactive()
+    {
+        this.gameObject.SetActive(false);
     }
 
     private void UpdateVisual()
@@ -31,15 +43,8 @@ public class UI_Selector : MonoBehaviour
             weaponSlotTransform.gameObject.SetActive(true);
             RectTransform weaponSlotRectTransform = weaponSlotTransform.GetComponent<RectTransform>();
             weaponSlotRectTransform.anchoredPosition = new Vector2(60f * Mathf.Sin(i*(Mathf.PI/2)),60f * Mathf.Cos(i* (Mathf.PI / 2)));
-            Debug.Log("weaponslottransform: " + (weaponSlotTransform == null));
-            Debug.Log("weapon: " + (weapon == null));
-            Debug.Log("weaponslottransform item image: " + (weaponSlotTransform.Find("ItemImage") == null));
-            Debug.Log("weapon sprite " + (weapon.getSprite() == null));
             weaponSlotTransform.Find("ItemImage").GetComponent<Image>().sprite = weapon.getSprite();
-            Debug.Log("Find number text component" + (weaponSlotTransform.Find("numberText").GetComponent<TMPro.TextMeshProUGUI>() == null));
-            Debug.Log("Find number text" + (weaponSlotTransform.Find("numberText") == null));
             weaponSlotTransform.Find("numberText").GetComponent<TMPro.TextMeshProUGUI>().SetText((i+1).ToString());
-            Debug.Log("Paso por update list: " + i);
         }
     }
 }

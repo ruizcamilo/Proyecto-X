@@ -59,6 +59,8 @@ public class PlayerController : MonoBehaviour
     private Vector2 _inputAxis;
     private Timer inmunnity;
 
+    private bool selectorActivo = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -118,6 +120,23 @@ public class PlayerController : MonoBehaviour
             Ability(2);
         }
 
+        if(Input.GetKeyDown(KeyCode.UpArrow)||Input.GetKeyDown(KeyCode.RightArrow)|| Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            if(!selectorActivo)
+            {
+                scriptUI.activarUISelector();
+                selectorActivo = true;
+                StartCoroutine(deactivateUISelector());
+            }
+            else
+            {
+                StopCoroutine(deactivateUISelector());
+                scriptUI.desactivarUISelector();
+                selectorActivo = false;
+            }
+        }
+        
+
         //_inputAxis = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         if (_grounded)
         {
@@ -131,6 +150,12 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    IEnumerator deactivateUISelector()
+    {
+        yield return new WaitForSecondsRealtime((float)1.5);
+        scriptUI.desactivarUISelector();
+        selectorActivo = false;
+    }
     void takeDamage(int pDamage)
     {
         health -= pDamage;
@@ -244,15 +269,15 @@ public class PlayerController : MonoBehaviour
 
     void setColor()
     {
-        switch (this._weapon.type)
+        switch (this._weapon.selectedWeapon)
         {
-            case 0:
+            case Weapon.WeaponType.normalShot:
                 this._renderer.material.color = _original;
                 break;
-            case 1:
+            case Weapon.WeaponType.fanShot:
                 this._renderer.material.color = Color.red;
                 break;
-            case 2:
+            case Weapon.WeaponType.heavyShot:
                 this._renderer.material.color = Color.blue;
                 break;
             default:
