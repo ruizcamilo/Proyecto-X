@@ -5,6 +5,11 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+
+    public GameObject UI;
+    [HideInInspector]
+    public UI_Controller scriptUI;
+
     public float maxSpeed;
     public float dashSpeed;
     public float speed;
@@ -18,6 +23,8 @@ public class PlayerController : MonoBehaviour
 
     private float health;
     public float Max_health;
+
+    public int monedas; 
 
     //Factores de debuff
     public float debuffTime = 10f;
@@ -54,9 +61,13 @@ public class PlayerController : MonoBehaviour
     private Vector2 _inputAxis;
     private Timer inmunnity;
 
+    private bool selectorActivo = false;
+
     // Start is called before the first frame update
     void Start()
     {
+        monedas = 0;
+        scriptUI = UI.GetComponent<UI_Controller>();
         _box = transform.GetComponent<BoxCollider2D>();
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
@@ -69,6 +80,7 @@ public class PlayerController : MonoBehaviour
         inmunnity.Duration =0.5f;
         inmunnity.Run();
         _facingRight = true;
+        scriptUI.setVida((int)Max_health);
     }
 
     // Update is called once per frame
@@ -76,7 +88,7 @@ public class PlayerController : MonoBehaviour
     {
         if (_box.IsTouchingLayers()&&inmunnity.Finished)
         {
-            health -= 1;
+            takeDamage(1);
             inmunnity.Run();
             //Debug.Log("vida: "+healt);
             if(health ==0)
@@ -84,6 +96,7 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("U DED");
                 OnBecameInvisible();
                 health = Max_health;
+                scriptUI.setVida((int)Max_health);
             }
         }
 
@@ -115,6 +128,23 @@ public class PlayerController : MonoBehaviour
             slowFall();
         }
 
+        if(Input.GetKeyDown(KeyCode.UpArrow)||Input.GetKeyDown(KeyCode.RightArrow)|| Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            if(!selectorActivo)
+            {
+                scriptUI.activarUISelector();
+                selectorActivo = true;
+                StartCoroutine(deactivateUISelector());
+            }
+            else
+            {
+                StopCoroutine(deactivateUISelector());
+                scriptUI.desactivarUISelector();
+                selectorActivo = false;
+            }
+        }
+        
+
         //_inputAxis = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         if (_grounded)
         {
@@ -128,6 +158,18 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    IEnumerator deactivateUISelector()
+    {
+        yield return new WaitForSecondsRealtime((float)1.5);
+        scriptUI.desactivarUISelector();
+        selectorActivo = false;
+    }
+    void takeDamage(int pDamage)
+    {
+        health -= pDamage;
+        scriptUI.reducirPuntosVida(pDamage);
+        Debug.Log("Player took: " + pDamage + " damage");
+    }
 
     void FixedUpdate()
     {
@@ -248,15 +290,15 @@ public class PlayerController : MonoBehaviour
 
     void setColor()
     {
-        switch (this._weapon.type)
+        switch (this._weapon.selectedWeapon)
         {
-            case 0:
+            case Weapon.WeaponType.normalShot:
                 this._renderer.material.color = _original;
                 break;
-            case 1:
+            case Weapon.WeaponType.fanShot:
                 this._renderer.material.color = Color.red;
                 break;
-            case 2:
+            case Weapon.WeaponType.heavyShot:
                 this._renderer.material.color = Color.blue;
                 break;
             case 3:
@@ -265,6 +307,13 @@ public class PlayerController : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    public void recolectarMonedas(int pMonedas)
+    {
+        monedas += pMonedas;
+        scriptUI.recolectarMonedas(pMonedas);
+        Debug.Log("Se recolectaron " + pMonedas + " y el total ahora es " + monedas);
     }
 
     private bool IsGrounded()

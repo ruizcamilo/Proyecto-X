@@ -12,6 +12,16 @@ public class Weapon : MonoBehaviour
     [HideInInspector]
     public int type;
 
+    public enum WeaponType
+    {
+        normalShot,
+        fanShot,
+        heavyShot
+    }
+
+    private int numWeapons = System.Enum.GetValues(typeof(WeaponType)).Length;
+    public WeaponType selectedWeapon= WeaponType.normalShot;
+
     public GameObject bulletPrefab;
     public GameObject bigBulletPrefab;
     public GameObject shooter;
@@ -30,8 +40,8 @@ public class Weapon : MonoBehaviour
     private void Awake()
     {
         _firePoint = transform.Find("FirePoint");
-        _timers = new Timer[maxWeapons];
-        for(int i=0; i<maxWeapons; i++)
+        _timers = new Timer[numWeapons];
+        for(int i=0; i<numWeapons; i++)
         {
             _timers[i] = gameObject.AddComponent<Timer>();
             _timers[i].Duration = times[i];
@@ -40,18 +50,21 @@ public class Weapon : MonoBehaviour
         
     }
 
+
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            type = (type + 1) % maxWeapons;
-        }
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            type = type - 1;
-            if (type == -1)
-                type = maxWeapons - 1;
-        }
+        //if (Input.GetKeyDown(KeyCode.LeftArrow))
+        //{
+        //    selectedWeapon = WeaponType.normalShot;
+        //}
+        //else if (Input.GetKeyDown(KeyCode.UpArrow))
+        //{
+        //    selectedWeapon = WeaponType.fanShot;
+        //}
+        //else if (Input.GetKeyDown(KeyCode.RightArrow))
+        //{
+        //    selectedWeapon = WeaponType.heavyShot;
+        //}
         if(Input.GetKeyDown(KeyCode.Space))
         {
             StartCoroutine(Shoot());
@@ -74,23 +87,31 @@ public class Weapon : MonoBehaviour
         _firePoint.localPosition = _direction * radius;
     }
 
+    public void setWeaponType (WeaponType weapontype)
+    {
+        selectedWeapon = weapontype;
+        Debug.Log("Setting weapon type to: " + weapontype);
+    }
+
     IEnumerator Shoot()
     {
         // Shoot if timer is finished
-        if (_timers[type].Finished)
+        if (_timers[(int)selectedWeapon].Finished)
         {
             float angle = Vector2.Angle(new Vector2(_facingRight, 0), _direction);
             if (_direction.y < 0)
                 angle *= -1;
             Quaternion rot = Quaternion.Euler(_firePoint.rotation.x, _firePoint.rotation.y, angle);
-            
             shooter.GetComponent<Animator>().SetTrigger("Shoot");
-            switch (type)
+
+            switch ((int)selectedWeapon)
             {
                 case 0:
+                    Debug.Log("Shooting normal shot: " + selectedWeapon);
                     Instantiate(bulletPrefab, _firePoint.position, rot);
                     break;
                 case 1:
+                    Debug.Log("Shooting fan shot: " + selectedWeapon);
                     Quaternion rot1 = Quaternion.Euler(_firePoint.rotation.x, _firePoint.rotation.y, angle + 30f);
                     Quaternion rot2 = Quaternion.Euler(_firePoint.rotation.x, _firePoint.rotation.y, angle - 30f);
                     Instantiate(bulletPrefab, _firePoint.position, rot1);
@@ -98,6 +119,7 @@ public class Weapon : MonoBehaviour
                     Instantiate(bulletPrefab, _firePoint.position, rot2);
                     break;
                 case 2:
+                    Debug.Log("Shooting heavy shot: " + selectedWeapon);
                     Instantiate(bigBulletPrefab, _firePoint.position, rot);
                     break;
                 case 3:
