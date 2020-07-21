@@ -16,7 +16,6 @@ public class Patrulla : MonoBehaviour
     public BoxCollider2D pared;
     public SpriteRenderer Oldi;
     public Sprite second;
-    private float hp = 40;
     private void Update()
     {
         
@@ -24,14 +23,6 @@ public class Patrulla : MonoBehaviour
        // _hit = Physics2D.BoxCast(box.bounds.center, box.bounds.size, 0f, Vector2.down, .1f, pisoLayerMask);
 
         RaycastHit2D infoSuelo = Physics2D.Raycast(detectaSuelo.position, Vector2.down);
-        Animator obs = GetComponent<Animator>();
-        if(hp<=0)
-        {
-            velocidad = 0;
-            obs.enabled = false;
-            Oldi.sprite=second;
-
-        }
         if(cc!=null&&cc.IsTouching(pared))
         {
             transform.eulerAngles = new Vector3(0, -180, 0);
@@ -53,22 +44,12 @@ public class Patrulla : MonoBehaviour
         
     }
 
-
-    void OnTriggerEnter2D(Collider2D hitInfo)
+    public void Death()
     {
-
-        if (hitInfo.CompareTag("Bullet"))
-        {
-            Bullet bul = hitInfo.GetComponent<Bullet>();
-            if(bul != null)
-            {
-                hp -= bul.damage;
-            }
-            else
-            {
-                hp -= hitInfo.GetComponent<SuperShot>().damage;
-            }
-        }
-        
+        Animator obs = GetComponent<Animator>();
+        velocidad = 0;
+        obs.enabled = false;
+        Oldi.sprite = second;
     }
+
 }

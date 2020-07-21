@@ -91,4 +91,9 @@ public class Wolf : MonoBehaviour
 
     }
 
+    public void Death()
+    {
+        Destroy(gameObject);
+    }
+
 }

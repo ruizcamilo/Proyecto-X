@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     public string ability1;
     public string ability2;
 
-    private float health;
+    public float health;
     public float Max_health;
 
     //Factores de debuff
