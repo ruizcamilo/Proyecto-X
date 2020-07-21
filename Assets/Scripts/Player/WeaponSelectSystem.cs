@@ -15,7 +15,8 @@ public class WeaponSelectSystem
     {
         NormalShot,
         FanShot,
-        HeavyShot
+        HeavyShot,
+        SuperShot
     }
 
     public WeaponSelectSystem(Weapon weaponPlayer)
@@ -41,6 +42,12 @@ public class WeaponSelectSystem
             activateWeaponAction = () => weaponPlayer.setWeaponType(Weapon.WeaponType.heavyShot)
         });
 
+        weaponsList.Add(new SelectorSystem
+        {
+            weaponType = WeaponType.SuperShot,
+            activateWeaponAction = () => weaponPlayer.setWeaponType(Weapon.WeaponType.superShot)
+        });
+
     }
     public void Update()
     {
@@ -57,6 +64,10 @@ public class WeaponSelectSystem
             if (Input.GetKeyDown(KeyCode.DownArrow))
             {
                 weaponsList[2].activateWeaponAction();
+            }
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                weaponsList[3].activateWeaponAction();
             }
         }
     }
@@ -80,6 +91,7 @@ public class WeaponSelectSystem
                 case WeaponType.NormalShot: return TestScript.Instance.normalShot;
                 case WeaponType.FanShot: return TestScript.Instance.fanShot;
                 case WeaponType.HeavyShot: return TestScript.Instance.HeavyShot;
+                case WeaponType.SuperShot: return TestScript.Instance.SuperShot;
             }
         }
     }

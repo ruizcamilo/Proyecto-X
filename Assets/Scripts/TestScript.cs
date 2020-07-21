@@ -13,6 +13,8 @@ public class TestScript : MonoBehaviour
 
     public Sprite HeavyShot;
 
+    public Sprite SuperShot;
+
     private WeaponSelectSystem weaponSelectSystem;
 
     private bool selecting= false;
@@ -39,13 +41,13 @@ public class TestScript : MonoBehaviour
         weaponSelectSystem.Update();
         if (selecting)
         {
-            if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.DownArrow))
+            if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.DownArrow)||  Input.GetKeyDown(KeyCode.LeftArrow))
             {
                 weaponSelectSystem.selecting = false;
                 selecting = false;
                 StopCoroutine(waitSelectingCoroutine());
             }
-        }else if(Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.DownArrow))
+        }else if(Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.LeftArrow))
         {
             selecting = true;
             weaponSelectSystem.selecting = true;

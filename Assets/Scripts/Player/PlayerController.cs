@@ -128,7 +128,7 @@ public class PlayerController : MonoBehaviour
             slowFall();
         }
 
-        if(Input.GetKeyDown(KeyCode.UpArrow)||Input.GetKeyDown(KeyCode.RightArrow)|| Input.GetKeyDown(KeyCode.DownArrow))
+        if(Input.GetKeyDown(KeyCode.UpArrow)||Input.GetKeyDown(KeyCode.RightArrow)|| Input.GetKeyDown(KeyCode.DownArrow)|| Input.GetKeyDown(KeyCode.LeftArrow))
         {
             if(!selectorActivo)
             {
@@ -301,7 +301,7 @@ public class PlayerController : MonoBehaviour
             case Weapon.WeaponType.heavyShot:
                 this._renderer.material.color = Color.blue;
                 break;
-            case 3:
+            case Weapon.WeaponType.superShot:
                 _renderer.material.color = Color.green;
                 break;
             default:

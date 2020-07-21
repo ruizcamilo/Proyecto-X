@@ -839,9 +839,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponPlayer: {fileID: 0}
   uiSelector: {fileID: 4562997135059615635}
-  normalShot: {fileID: 724076939076044100, guid: dec1cf63d54e8c54381dc2c858f69b98,
+  normalShot: {fileID: 6831002660552553487, guid: dec1cf63d54e8c54381dc2c858f69b98,
     type: 3}
-  fanShot: {fileID: -3793682818785140518, guid: dec1cf63d54e8c54381dc2c858f69b98,
+  fanShot: {fileID: -6397885615492789280, guid: dec1cf63d54e8c54381dc2c858f69b98,
     type: 3}
   HeavyShot: {fileID: 5388230623493139421, guid: dec1cf63d54e8c54381dc2c858f69b98,
+    type: 3}
+  SuperShot: {fileID: 724076939076044100, guid: dec1cf63d54e8c54381dc2c858f69b98,
     type: 3}

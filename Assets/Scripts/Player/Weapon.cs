@@ -16,7 +16,8 @@ public class Weapon : MonoBehaviour
     {
         normalShot,
         fanShot,
-        heavyShot
+        heavyShot,
+        superShot
     }
 
     private int numWeapons = System.Enum.GetValues(typeof(WeaponType)).Length;

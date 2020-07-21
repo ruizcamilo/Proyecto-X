@@ -1804,6 +1804,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1150843448775201041, guid: 74a3568e72cd28846aaa41ae74c58552,
+        type: 3}
+      propertyPath: weaponPlayer
+      value: 
+      objectReference: {fileID: 1822468257}
     - target: {fileID: 4562997133357084557, guid: 74a3568e72cd28846aaa41ae74c58552,
         type: 3}
       propertyPath: m_Name
@@ -1916,6 +1921,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74a3568e72cd28846aaa41ae74c58552, type: 3}
+--- !u!114 &1822468257 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3409488116965508705, guid: 663775e21e91d0841b2fd31ec9976f90,
+    type: 3}
+  m_PrefabInstance: {fileID: 7954736366355242427}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d0c350403daf9c4ba1cc4d265b80ab8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1830184678
 PrefabInstance:
   m_ObjectHideFlags: 0
