@@ -154,6 +154,29 @@ public class PlayerController : MonoBehaviour
         float horizontalInput = Input.GetAxisRaw("Horizontal");
         _movement = new Vector2(horizontalInput, 0f);
 
+        Debug.Log(horizontalInput);
+        if (!_fixed && Input.GetKeyDown(KeyCode.W))
+        {
+            _walk = false;
+            if (IsGrounded())
+            {
+                //_rigidbody.velocity = _movement;
+                _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0);
+                _rigidbody.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+
+            }
+            else
+            {
+                if (_jump)
+                {
+                    _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0);
+                    _rigidbody.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+                    _jump = false;
+                }
+            }
+        }
+
+
     }
 
     IEnumerator deactivateUISelector()
@@ -173,41 +196,13 @@ public class PlayerController : MonoBehaviour
     {
         if (_fixed)
             _rigidbody.velocity = new Vector2(0, _rigidbody.velocity.y);
-
-        if (!_fixed && Input.GetKeyDown(KeyCode.W))
-        {
-            _walk = false;
-            if (IsGrounded())
-            {
-                _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0);
-                _rigidbody.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
-
-            }
-            else
-            {
-                if (_jump)
-                {
-                    _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0);
-                    _rigidbody.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
-                    _jump = false;
-                }
-            }
-        }
-
+ 
         float horizontalInput = Input.GetAxisRaw("Horizontal");
         _movement = new Vector2(horizontalInput, 0f);
 
-    }
-
-
-    void FixedUpdate()
-    {
-        if (_fixed)
-            _rigidbody.velocity = new Vector2(0, _rigidbody.velocity.y);
-
         if (!_fixed)
         {
-            if (Input.GetKeyDown(KeyCode.Z) && _dash)
+            if (Input.GetKeyDown(KeyCode.L) && _dash)
             {
                 Debug.Log("dashprron");
                 _rigidbody.velocity = new Vector2(_movement.x * dashSpeed, _rigidbody.velocity.y);
@@ -216,11 +211,14 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
+                
                 float limitedSpeed = Mathf.Clamp(_movement.normalized.x * speed, -maxSpeed, maxSpeed);
+
                 _rigidbody.velocity = new Vector2(limitedSpeed, _rigidbody.velocity.y);
             }
-        }
 
+
+        }
     }
 
     private void LateUpdate()
