@@ -21,7 +21,7 @@ public class Clone : MonoBehaviour
     {
         rgb.velocity = new Vector2(speed, 0);
         this.life++;
-        if(this.life == 5f)
+        if(this.life == 20f)
         {
             Destroy(gameObject);
         }
