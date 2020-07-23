@@ -483,6 +483,50 @@ PrefabInstance:
       propertyPath: damage
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 2134241129, guid: 663775e21e91d0841b2fd31ec9976f90, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2134241132, guid: 663775e21e91d0841b2fd31ec9976f90, type: 3}
+      propertyPath: m_Parameters.colorGradient.m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2134241132, guid: 663775e21e91d0841b2fd31ec9976f90, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2134241132, guid: 663775e21e91d0841b2fd31ec9976f90, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2134241132, guid: 663775e21e91d0841b2fd31ec9976f90, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2134241132, guid: 663775e21e91d0841b2fd31ec9976f90, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2134241132, guid: 663775e21e91d0841b2fd31ec9976f90, type: 3}
+      propertyPath: m_Parameters.colorGradient.ctime0
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2134241132, guid: 663775e21e91d0841b2fd31ec9976f90, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2134241132, guid: 663775e21e91d0841b2fd31ec9976f90, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2134241132, guid: 663775e21e91d0841b2fd31ec9976f90, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.b
+      value: 0.27750063
+      objectReference: {fileID: 0}
+    - target: {fileID: 2134241132, guid: 663775e21e91d0841b2fd31ec9976f90, type: 3}
+      propertyPath: m_Parameters.widthMultiplier
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 7954736366048772310, guid: 663775e21e91d0841b2fd31ec9976f90,
         type: 3}
       propertyPath: m_Layer
