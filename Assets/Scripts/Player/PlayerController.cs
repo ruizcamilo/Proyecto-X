@@ -41,7 +41,9 @@ public class PlayerController : MonoBehaviour
     private bool _playerIsSingleJump = false;
 
     private bool _playerIsLight = false;
-
+    
+    [HideInInspector]
+    public bool playerCanMove = true;
     // States
     private bool _jump, _walk, _dash;
     private bool _grounded;
@@ -85,7 +87,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        _grounded = IsGrounded();
+        //_grounded = IsGrounded();
         
 
         if (Input.GetKeyDown(KeyCode.LeftShift))
@@ -112,7 +114,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //_inputAxis = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        if (_grounded)
+        if (IsGrounded())
         {
             _jump = true;
             _walk = true;
@@ -122,7 +124,7 @@ public class PlayerController : MonoBehaviour
         if (!_fixed && Input.GetKeyDown(KeyCode.W))
         {
             _walk = false;
-            if (_grounded)
+            if (IsGrounded())
             {
                 _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0);
                 _rigidbody.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
@@ -171,7 +173,7 @@ public class PlayerController : MonoBehaviour
     private void LateUpdate()
     {
         setColor();
-        _animator.SetBool("Grounded", _grounded);
+        _animator.SetBool("Grounded", IsGrounded());
         _animator.SetBool("Idle", _movement == Vector2.zero || _fixed ) ;
 
         if(_movement.x > 0f && !_facingRight)
@@ -262,6 +264,7 @@ public class PlayerController : MonoBehaviour
 
     private bool IsGrounded()
     {
+        Debug.Log(Physics2D.OverlapCircle(groundPoint.position, groundRadius, pisoLayerMask));
         return Physics2D.OverlapCircle(groundPoint.position, groundRadius, pisoLayerMask);
     }
 
