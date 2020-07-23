@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//------------------------------------------------------ESTE ES EL GALO------------------------------------------------------------//
 public class PlayerController : MonoBehaviour
 {
     //Movimiento

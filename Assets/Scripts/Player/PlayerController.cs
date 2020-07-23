@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//--------------------------------------------------ESTE ES EL DE TULIO-----------------------------------------------------------//
 public class PlayerController : MonoBehaviour
 {
     public float maxSpeed;
@@ -23,10 +25,6 @@ public class PlayerController : MonoBehaviour
     public float debuffTime = 10f;
     public float debuffFactorSlow = 3f;
     public float debuffFactorHeavy = 3f;
-
-    //Esto se hace para que la variable se puede acceder desde otros scripts pero no se muestra en el inspector de Unity
-    [HideInInspector]
-    public bool playerCanMove = true;
 
     //Variables privadas
     private Rigidbody2D _rigidbody;
@@ -89,8 +87,6 @@ public class PlayerController : MonoBehaviour
 
         _grounded = IsGrounded();
         
-        if (!playerCanMove)
-            return;
 
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
@@ -122,6 +118,26 @@ public class PlayerController : MonoBehaviour
             _walk = true;
             _dash = true;
         }
+        
+        if (!_fixed && Input.GetKeyDown(KeyCode.W))
+        {
+            _walk = false;
+            if (_grounded)
+            {
+                _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0);
+                _rigidbody.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+
+            }
+            else
+            {
+                if (_jump)
+                {
+                    _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0);
+                    _rigidbody.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+                    _jump = false;
+                }
+            }
+        }
 
         float horizontalInput = Input.GetAxisRaw("Horizontal");
         _movement = new Vector2(horizontalInput, 0f);
@@ -133,29 +149,6 @@ public class PlayerController : MonoBehaviour
     {
         if (_fixed)
             _rigidbody.velocity = new Vector2(0, _rigidbody.velocity.y);
-
-        if (!_fixed && Input.GetKeyDown(KeyCode.W))
-        {
-            _walk = false;
-            if (_grounded)
-            {
-                _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0);
-                _rigidbody.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
-                //_rigidbody.AddForce(new Vector2(0, jumpPower));
-
-            }
-            else
-            {
-                if (_jump)
-                {
-                    _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0);
-                    _rigidbody.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
-                    //_rigidbody.AddForce(new Vector2(0, jumpPower*2));
-
-                    _jump = false;
-                }
-            }
-        }
 
         if (!_fixed)
         {
