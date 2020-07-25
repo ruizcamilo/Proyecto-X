@@ -4,8 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Ground
   - Platform
+  - Enemy
+  - Ground
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -15,11 +17,11 @@ TagManager:
   - UI
   - 
   - 
-  - Piso
-  - Ground 
-  - 
-  - 
-  - 
+  - Player
+  - Ground
+  - Bullet
+  - Enemy
+  - Wall
   - 
   - 
   - 
@@ -40,9 +42,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 4237521367
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
   - name: Player
     uniqueID: 1797124523
+    locked: 0
+  - name: Foreground
+    uniqueID: 1096833527
     locked: 0

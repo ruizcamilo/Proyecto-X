@@ -20,7 +20,7 @@ public class WaterClone : MonoBehaviour
     void Update()
     {
         //if (Input.GetKeyDown(KeyCode.E) && !clone)
-        if(Input.GetKeyDown(KeyCode.E) && numClones<=4)
+        if(Input.GetKeyDown(KeyCode.F) && numClones<=4)
         {
             //clone = true;
             numClones++;
