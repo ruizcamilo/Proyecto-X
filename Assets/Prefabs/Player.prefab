@@ -430,7 +430,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.052176237, y: 0.5267881}
+  m_Offset: {x: 0.052176237, y: 0.5}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
@@ -476,6 +476,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88eb6eed1b4adde4e8f87e8f67344855, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UI: {fileID: 0}
+  scriptUI: {fileID: 0}
   maxSpeed: 4
   dashSpeed: 60
   speed: 75
@@ -486,9 +488,10 @@ MonoBehaviour:
   groundPoint: {fileID: 3663027290886198169}
   groundRadius: 0.025
   jumpPower: 9.25
-  ability1: 
-  ability2: 
-  Max_health: 0
+  ability1: SuperShot
+  ability2: GravityMess
+  Max_health: 5
+  monedas: 0
   debuffTime: 10
   debuffFactorSlow: 3
   debuffFactorHeavy: 3
@@ -520,7 +523,7 @@ GameObject:
   m_Layer: 10
   m_Name: FirePoint
   m_TagString: Untagged
-  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1

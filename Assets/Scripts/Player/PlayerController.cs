@@ -3,8 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//--------------------------------------------------ESTE ES EL DE TULIO-----------------------------------------------------------//
 public class PlayerController : MonoBehaviour
 {
+
+    public GameObject UI;
+    [HideInInspector]
+    public UI_Controller scriptUI;
+
     public float maxSpeed;
     public float dashSpeed;
     public float speed;
@@ -19,14 +26,12 @@ public class PlayerController : MonoBehaviour
     public float health;
     public float Max_health;
 
+    public int monedas; 
+
     //Factores de debuff
     public float debuffTime = 10f;
     public float debuffFactorSlow = 3f;
     public float debuffFactorHeavy = 3f;
-
-    //Esto se hace para que la variable se puede acceder desde otros scripts pero no se muestra en el inspector de Unity
-    [HideInInspector]
-    public bool playerCanMove = true;
 
     //Variables privadas
     private Rigidbody2D _rigidbody;
@@ -43,7 +48,9 @@ public class PlayerController : MonoBehaviour
     private bool _playerIsSingleJump = false;
 
     private bool _playerIsLight = false;
-
+    
+    [HideInInspector]
+    public bool playerCanMove = true;
     // States
     private bool _jump, _walk, _dash;
     private bool _grounded;
@@ -54,9 +61,13 @@ public class PlayerController : MonoBehaviour
     private Vector2 _inputAxis;
     private Timer inmunnity;
 
+    private bool selectorActivo = false;
+
     // Start is called before the first frame update
     void Start()
     {
+        monedas = 0;
+        scriptUI = UI.GetComponent<UI_Controller>();
         _box = transform.GetComponent<BoxCollider2D>();
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
@@ -69,6 +80,7 @@ public class PlayerController : MonoBehaviour
         inmunnity.Duration =0.5f;
         inmunnity.Run();
         _facingRight = true;
+        scriptUI.setVida((int)Max_health);
     }
 
     // Update is called once per frame
@@ -76,7 +88,7 @@ public class PlayerController : MonoBehaviour
     {
         if (_box.IsTouchingLayers()&&inmunnity.Finished)
         {
-            health -= 1;
+            takeDamage(1);
             inmunnity.Run();
             //Debug.Log("vida: "+healt);
             if(health ==0)
@@ -84,13 +96,12 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("U DED");
                 OnBecameInvisible();
                 health = Max_health;
+                scriptUI.setVida((int)Max_health);
             }
         }
 
-        _grounded = IsGrounded();
+        //_grounded = IsGrounded();
         
-        if (!playerCanMove)
-            return;
 
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
@@ -115,8 +126,25 @@ public class PlayerController : MonoBehaviour
             slowFall();
         }
 
+        if(Input.GetKeyDown(KeyCode.UpArrow)||Input.GetKeyDown(KeyCode.RightArrow)|| Input.GetKeyDown(KeyCode.DownArrow)|| Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            if(!selectorActivo)
+            {
+                scriptUI.activarUISelector();
+                selectorActivo = true;
+                StartCoroutine(deactivateUISelector());
+            }
+            else
+            {
+                StopCoroutine(deactivateUISelector());
+                scriptUI.desactivarUISelector();
+                selectorActivo = false;
+            }
+        }
+        
+
         //_inputAxis = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        if (_grounded)
+        if (IsGrounded())
         {
             _jump = true;
             _walk = true;
@@ -126,22 +154,15 @@ public class PlayerController : MonoBehaviour
         float horizontalInput = Input.GetAxisRaw("Horizontal");
         _movement = new Vector2(horizontalInput, 0f);
 
-    }
-
-
-    void FixedUpdate()
-    {
-        if (_fixed)
-            _rigidbody.velocity = new Vector2(0, _rigidbody.velocity.y);
-
+        Debug.Log(horizontalInput);
         if (!_fixed && Input.GetKeyDown(KeyCode.W))
         {
             _walk = false;
-            if (_grounded)
+            if (IsGrounded())
             {
+                //_rigidbody.velocity = _movement;
                 _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0);
                 _rigidbody.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
-                //_rigidbody.AddForce(new Vector2(0, jumpPower));
 
             }
             else
@@ -150,16 +171,38 @@ public class PlayerController : MonoBehaviour
                 {
                     _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0);
                     _rigidbody.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
-                    //_rigidbody.AddForce(new Vector2(0, jumpPower*2));
-
                     _jump = false;
                 }
             }
         }
 
+
+    }
+
+    IEnumerator deactivateUISelector()
+    {
+        yield return new WaitForSecondsRealtime((float)1.5);
+        scriptUI.desactivarUISelector();
+        selectorActivo = false;
+    }
+    void takeDamage(int pDamage)
+    {
+        health -= pDamage;
+        scriptUI.reducirPuntosVida(pDamage);
+        Debug.Log("Player took: " + pDamage + " damage");
+    }
+
+    void FixedUpdate()
+    {
+        if (_fixed)
+            _rigidbody.velocity = new Vector2(0, _rigidbody.velocity.y);
+ 
+        float horizontalInput = Input.GetAxisRaw("Horizontal");
+        _movement = new Vector2(horizontalInput, 0f);
+
         if (!_fixed)
         {
-            if (Input.GetKeyDown(KeyCode.Z) && _dash)
+            if (Input.GetKeyDown(KeyCode.L) && _dash)
             {
                 Debug.Log("dashprron");
                 _rigidbody.velocity = new Vector2(_movement.x * dashSpeed, _rigidbody.velocity.y);
@@ -168,17 +211,20 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
+                
                 float limitedSpeed = Mathf.Clamp(_movement.normalized.x * speed, -maxSpeed, maxSpeed);
+
                 _rigidbody.velocity = new Vector2(limitedSpeed, _rigidbody.velocity.y);
             }
-        }
 
+
+        }
     }
 
     private void LateUpdate()
     {
         setColor();
-        _animator.SetBool("Grounded", _grounded);
+        _animator.SetBool("Grounded", IsGrounded());
         _animator.SetBool("Idle", _movement == Vector2.zero || _fixed ) ;
 
         if(_movement.x > 0f && !_facingRight)
@@ -248,18 +294,18 @@ public class PlayerController : MonoBehaviour
 
     void setColor()
     {
-        switch (this._weapon.type)
+        switch (this._weapon.selectedWeapon)
         {
-            case 0:
+            case Weapon.WeaponType.normalShot:
                 this._renderer.material.color = _original;
                 break;
-            case 1:
+            case Weapon.WeaponType.fanShot:
                 this._renderer.material.color = Color.red;
                 break;
-            case 2:
+            case Weapon.WeaponType.heavyShot:
                 this._renderer.material.color = Color.blue;
                 break;
-            case 3:
+            case Weapon.WeaponType.superShot:
                 _renderer.material.color = Color.green;
                 break;
             default:
@@ -267,8 +313,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void recolectarMonedas(int pMonedas)
+    {
+        monedas += pMonedas;
+        scriptUI.recolectarMonedas(pMonedas);
+        Debug.Log("Se recolectaron " + pMonedas + " y el total ahora es " + monedas);
+    }
+
     private bool IsGrounded()
     {
+        Debug.Log(Physics2D.OverlapCircle(groundPoint.position, groundRadius, pisoLayerMask));
         return Physics2D.OverlapCircle(groundPoint.position, groundRadius, pisoLayerMask);
     }
 
