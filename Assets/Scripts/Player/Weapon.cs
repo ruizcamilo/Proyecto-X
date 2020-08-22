@@ -104,7 +104,7 @@ public class Weapon : MonoBehaviour
                 angle *= -1;
             Quaternion rot = Quaternion.Euler(_firePoint.rotation.x, _firePoint.rotation.y, angle);
             shooter.GetComponent<Animator>().SetTrigger("Shoot");
-
+            shooter.GetComponent<Animator>().SetInteger("Weapon", (int)selectedWeapon);
             switch ((int)selectedWeapon)
             {
                 case 0:
@@ -125,9 +125,7 @@ public class Weapon : MonoBehaviour
                     break;
                 case 3:
                     _superShot.transform.localPosition = new Vector2( radius, 0);
-                    _superShot.SetActive(true);
-                    yield return new WaitForSeconds(0.2f);
-                    _superShot.SetActive(false);
+                    yield return new WaitForSeconds(0.5f);
                     break;
                 default:
                     print("There's been an error");

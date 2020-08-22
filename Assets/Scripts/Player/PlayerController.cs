@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D _rigidbody;
     private Weapon _weapon;
     private Animator _animator;
-    private Renderer _renderer;
+    private SpriteRenderer _renderer;
     private Color _original;
     private BoxCollider2D _box;
     private Vector2 _movement;
@@ -53,7 +53,6 @@ public class PlayerController : MonoBehaviour
     public bool playerCanMove = true;
     // States
     private bool _jump, _walk, _dash;
-    private bool _grounded;
     private bool _fixed;
     private bool _facingRight;
 
@@ -64,7 +63,7 @@ public class PlayerController : MonoBehaviour
     private bool selectorActivo = false;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         monedas = 0;
         scriptUI = UI.GetComponent<UI_Controller>();
@@ -72,7 +71,7 @@ public class PlayerController : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _weapon = GetComponentInChildren<Weapon>();
-        _renderer = GetComponent<Renderer>();
+        _renderer = GetComponent<SpriteRenderer>();
         _original = _renderer.material.color;
         _box = GetComponent<BoxCollider2D>();
         health = Max_health;
@@ -86,22 +85,20 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         if (_box.IsTouchingLayers()&&inmunnity.Finished)
         {
             takeDamage(1);
             inmunnity.Run();
             //Debug.Log("vida: "+healt);
-            if(health ==0)
+            if(health == 0)
             {
                 Debug.Log("U DED");
                 OnBecameInvisible();
                 health = Max_health;
                 scriptUI.setVida((int)Max_health);
             }
-        }
-
-        //_grounded = IsGrounded();
-        
+        } */       
 
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
@@ -154,7 +151,6 @@ public class PlayerController : MonoBehaviour
         float horizontalInput = Input.GetAxisRaw("Horizontal");
         _movement = new Vector2(horizontalInput, 0f);
 
-        Debug.Log(horizontalInput);
         if (!_fixed && Input.GetKeyDown(KeyCode.W))
         {
             _walk = false;
@@ -294,7 +290,7 @@ public class PlayerController : MonoBehaviour
 
     void setColor()
     {
-        switch (this._weapon.selectedWeapon)
+        switch (_weapon.selectedWeapon)
         {
             case Weapon.WeaponType.normalShot:
                 this._renderer.material.color = _original;
@@ -322,7 +318,6 @@ public class PlayerController : MonoBehaviour
 
     private bool IsGrounded()
     {
-        Debug.Log(Physics2D.OverlapCircle(groundPoint.position, groundRadius, pisoLayerMask));
         return Physics2D.OverlapCircle(groundPoint.position, groundRadius, pisoLayerMask);
     }
 
@@ -363,6 +358,7 @@ public class PlayerController : MonoBehaviour
                 break;
             case "Invisibility":
                 Debug.Log("Habilidad "+choise+" "+perform);
+                StartCoroutine(Invisibility());
                 break;
             case "GravityMess":
                 Debug.Log("Habilidad "+choise+" "+perform);
@@ -371,6 +367,25 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("There's no ability assigned");
                 break;
         }   
+    }
+
+    private IEnumerator Invisibility()
+    {
+        _box.enabled = false;
+
+        Timer invisibility = gameObject.AddComponent<Timer>();
+        invisibility.Duration = 0.5f;
+        invisibility.Run();
+
+        while (invisibility.Finished)
+        {
+            yield return new WaitForSeconds(0.2f);
+            _renderer.enabled = false;
+            yield return new WaitForSeconds(0.2f);
+            _renderer.enabled = true;
+        }
+
+        _box.enabled = true;
     }
 
 }

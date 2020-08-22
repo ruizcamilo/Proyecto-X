@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     private float hp = 40;
+    private float damage = 10;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +38,10 @@ public class EnemyHealth : MonoBehaviour
             {
                 transform.SendMessageUpwards("Death");
             }
+        }
+        if (hitInfo.CompareTag("Player"))
+        {
+            hitInfo.GetComponent<PlayerController>().Damage(damage);
         }
     }
 }

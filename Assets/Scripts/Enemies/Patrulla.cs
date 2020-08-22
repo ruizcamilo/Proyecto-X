@@ -87,7 +87,7 @@ public class Patrulla : MonoBehaviour
         Animator obs = GetComponent<Animator>();
         velocidad = 0;
         obs.enabled = false;
-        Oldi.sprite = second;
+        //Oldi.sprite = second;
     }
 
 }
